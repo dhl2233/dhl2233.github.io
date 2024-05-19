@@ -1,0 +1,640 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>数据库设计 | 刘冬辉的个人博客</title>
+
+<link rel="shortcut icon" href="https://dhl2233.github.io/favicon.ico?v=1716159646223">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://dhl2233.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+    
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            刘冬辉的个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1716159646223"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    数据库设计
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-10-03 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="基础概念">基础概念</h1>
+<h2 id="sql-db-dbms分别是什么他们之间的关系">sql、DB、DBMS分别是什么，他们之间的关系？</h2>
+<h3 id="db">DB:</h3>
+<p>DataBase（数据库，数据库实际上在硬盘上以文件的形式存在）</p>
+<h3 id="dbms">DBMS:</h3>
+<p>DataBase Management System（数据库管理系统，常见的有：MySQL Oracle DB2 Sybase SqlServer…）</p>
+<h3 id="sql">SQL:</h3>
+<p>结构化查询语言，是一门标准通用的语言。标准的sql适合于所有的数据库产品。<br>
+SQL属于高级语言。只要能看懂英语单词的，写出来的sql语句，可以读懂什么意思。<br>
+SQL语句在执行的时候，实际上内部也会先进行编译，然后再执行sql。（sql语句的编译由DBMS完成。）</p>
+<h3 id="数据库三范式">数据库三范式</h3>
+<p>数据库三大范式分别是：</p>
+<ol>
+<li>第一范式（1NF）：要求数据库表的每一列都是不可分割的原子数据项，即列中不可再分，强调列的原子性。</li>
+<li>第二范式（2NF）：在满足1NF的基础上，要求每个表必须有一个数据项作为主键，其他数据项与主键一一对应，即要求数据库表中的每个非主键列必须完全依赖于主键，不能只依赖于主键的一部分（主要针对复合主键而言）。</li>
+<li>第三范式（3NF）：在满足2NF的基础上，要求任何非主属性不依赖于其他非主属性，即非主键列之间没有传递依赖关系。****</li>
+</ol>
+<h3 id="事务的四大特性">事务的四大特性</h3>
+<ul>
+<li>原子性： 事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行。</li>
+<li>一致性： 指在事务开始之前和事务结束以后，数据不会被破坏，假如A账户给B账户转10块钱，不管成功与否，A和B的总金额是不变的。</li>
+<li>隔离性： 多个事务并发访问时，事务之间是相互隔离的，即一个事务不影响其它事务运行效果。简言之，就是事务之间是进水不犯河水的。</li>
+<li>持久性： 表示事务完成以后，该事务对数据库所作的操作更改，将持久地保存在数据库之中。</li>
+</ul>
+<p>事务ACID特性的实现思想</p>
+<ul>
+<li>原子性：是使用 undo log来实现的，如果事务执行过程中出错或者用户执行了rollback，系统通过undo log日志返回事务开始的状态。</li>
+<li>持久性：使用 redo log来实现，只要redo log日志持久化了，当系统崩溃，即可通过redo log把数据恢复。</li>
+<li>隔离性：通过锁以及MVCC,使事务相互隔离开。</li>
+<li>一致性：通过回滚、恢复，以及并发情况下的隔离性，从而实现一致性。</li>
+</ul>
+<h2 id="学习mysql主要还是学习通用的sql语句那么sql语句包括增删改查sql语句怎么分类呢">学习MySQL主要还是学习通用的SQL语句，那么SQL语句包括增删改查，SQL语句怎么分类呢？</h2>
+<p>DQL（数据查询语言）: 查询语句，凡是select语句都是DQL。<br>
+DML（数据操作语言）：insert delete update，对表当中的数据进行增删改。<br>
+DDL（数据定义语言）：create drop alter，对表结构的增删改。<br>
+TCL（事务控制语言）：commit提交事务，rollback回滚事务。(TCL中的T是Transaction)<br>
+DCL（数据控制语言）: grant授权、revoke撤销权限等。</p>
+<h2 id="mysql数据库使用">MYSQL数据库使用</h2>
+<h3 id="数据库存储引擎">数据库存储引擎</h3>
+<h4 id="innodb">InnoDB</h4>
+<pre><code>使用场景：一般事务性，均使用该引擎，用途最广，如果把握不准，就使用该引擎
+特点：
+	修改快，支持事务 ———— 行锁
+	存储限制：64TG
+	事务支持：支持事务
+</code></pre>
+<h4 id="myisam">MyISAM</h4>
+<pre><code>使用场景：大量查询、很少修改的场景
+特点：
+	强调了快速读取操作————表锁
+	存储限制：256TG
+	事务支持：不支持事务
+</code></pre>
+<h4 id="memory">MEMORY</h4>
+<pre><code>可以把一些常见的数据，要保证性能，就保存在memory存储引擎
+使用场景：由于易失性，可以用于存储在分析中产生的中间表
+特点：
+    所有的数据都保存在内存中、一旦服务器重启，所有memory存储引擎的表数据会消失但是表结构会保存下来
+    存储限制：取决于RAM（随机存储器）
+    事务支持：不支持事务
+</code></pre>
+<h4 id="archive">Archive</h4>
+<pre><code>使用场景：在日志和数据采集的时候可以使用
+特点：
+    只允许插入和查询，不允许修改和删除，压缩存储，节约空间，可以实现高并发的插入，支持在自增ID上建立索引
+    archive表比MyISAM表要小大约75%，比支持事务处理的InnoDB表小大约83%
+    不支持索引（自增ID列除外）
+</code></pre>
+<h4 id="什么是幻读脏读不可重复读呢">什么是幻读，脏读，不可重复读呢？</h4>
+<ul>
+<li><strong>脏读 (Dirty Read)</strong>:事务A、B交替执行，事务A被事务B干扰到了，因为事务A读取到事务B未提交的数据,这就是</li>
+<li><strong>不可重复读 (Non-repeatable Read)</strong>:在一个事务范围内，两个相同的查询，读取同一条记录，却返回了不同的数据。</li>
+<li><strong>幻读 (Phantom Read)</strong>: 事务A查询一个范围的结果集，另一个并发事务B往这个范围中插入/删除了数据，并静悄悄地提交，然后事务A再次查询相同的范围，两次读取得到的结果集不一样了。</li>
+</ul>
+<h4 id="事务的隔离级别">事务的隔离级别</h4>
+<ul>
+<li>读未提交（Read Uncommitted）
+<ul>
+<li><strong>特点</strong>: 事务可以读取其他未提交事务的修改。</li>
+</ul>
+</li>
+<li>读已提交（Read Committed）
+<ul>
+<li><strong>特点</strong>: 事务只能读取其他已提交事务的修改。</li>
+<li><strong>解决问题</strong>: 避免了脏读。</li>
+</ul>
+</li>
+<li>可重复读（Repeatable Read）
+<ul>
+<li><strong>特点</strong>: 在同一个事务中，多次读取同一行数据会得到相同的结果，即使其他事务修改了数据。</li>
+<li><strong>解决问题</strong>: 避免了脏读和不可重复读。</li>
+</ul>
+</li>
+<li>串行化（Serializable）
+<ul>
+<li><strong>特点</strong>: 强制事务按顺序执行，仿佛事务是一个接一个顺序执行的。</li>
+<li><strong>并发问题</strong>: 解决了脏读、不可重复读和幻读问题。</li>
+<li><strong>性能影响</strong>: 由于加锁机制，这种隔离级别性能最差，但数据一致性最高。</li>
+</ul>
+</li>
+</ul>
+<p>Mysql默认的事务隔离级别是可重复读(Repeatable Read)</p>
+<h3 id="账号管理">账号管理</h3>
+<pre><code>查询用户：SELECT * from user;
+
+查看用户常用信息：select host,user from user;
+
+删除用户（慎用）：#命令：drop user 用户名；
+
+                                #drop user ls;
+权限操作：
+	设置权限（Grant）
+      #语法：grant privileges on databasename.tablename to username@'host';
+
+      #给zs用户 赋予 数据库db_xiaoli.t_p1_user 查询权限
+
+      grant SELECT on db_xiaoli.t_p1_user to zs@'%';
+
+      #给zs用户 赋予 数据库db_xiaoli中的表t_p1_user 修改权限
+
+      grant UPDATE on db_xiaoli.t_p1_user to zs@'%';
+
+      #给zs用户 赋予 数据库db_xiaoli中所有表 查询权限
+
+      grant SELECT on db_xiaoli.* to zs@'%';
+
+      #给zs用户 赋予 数据库db_xiaoli中所有表 所有权限
+
+      grant ALL on db_xiaoli.* to zs@'%';
+      
+	撤销权限（Revoke）
+      #语法：revoke privileges on databasename.tablename from username@'host';
+
+      #啥也不能回收,不会对GRANT ALL PRIVILEGES ON `db_xiaoli`.* TO `zs`@`%`有任何影响
+
+      revoke DELETE on db_xiaoli.t_p1_user from zs@'%';
+
+      #可以回收GRANT SELECT，UPDATE ON `db_xiaoli`.* TO `zs`@`%`这条赋权语句带来的权限
+
+      revoke all on db_xiaoli.* from zs@'%';
+
+      #注：revoke只能回收grants列表中更小的权限；
+      
+	查看用户权限
+		#命令：show grants for 用户名；
+		
+		show frants for 'zs'@'%';
+</code></pre>
+<h3 id="值类型分类">值类型分类</h3>
+<pre><code>整数：
+
+    tinyint 8位（-128 ~ 127）
+    smallint 16位（-32768 ~ 32767）
+    mediumint 24位（-8388608 ~ 8388607）
+    int 32位 大约正负21亿
+    bigint 64位
+
+实数（带有小数点）：
+
+    float 4个字节
+    double 8个字节
+    decimal 最多允许65个数字：涉及到数字的运算使用decimal
+
+字符串：
+
+    char：定长，MySQL根据定义字符串的长度一次分配足够的空间
+               适用场景：较短的字符串，且所有值接近同一长度
+    varchar：比定长类型节约空间
+                    适用场景：字符串的最长长度比评估长度大很多，列的更新较少
+                    缺点：频繁修改，且字符串的长度变化大时，可能出现页分裂
+	datetime：精度：秒
+                 与时区无关，8个字节存储空间
+                 范围：1001至9999年
+	timestamp：保存1970年1月1日午夜以来的秒数
+                    占用4个字节存储空间
+                    范围：1970年至2038年
+                    与时区有关
+                    默认为NOT NULL
+                    通常尽量使用timestamp
+                    精度：秒
+	date：yyyy-MM-dd
+	time：HH:mm:ss
+</code></pre>
+<h2 id="mysql基础增删改查">Mysql基础增删改查</h2>
+<h3 id="数据操作">数据操作</h3>
+<h4 id="insert-into">INSERT INTO</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 向表中插入新记录</p>
+<pre><code>INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...);
+</code></pre>
+</li>
+</ul>
+<h4 id="update">UPDATE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 更新表中的现有记录</p>
+<pre><code>UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+</code></pre>
+</li>
+</ul>
+<h4 id="delete">DELETE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 删除表中的现有记录</p>
+<pre><code>DELETE FROM table_name
+WHERE condition;
+</code></pre>
+</li>
+</ul>
+<h3 id="查询数据">查询数据</h3>
+<h3 id="基本查询">基本查询</h3>
+<h4 id="select">SELECT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 从数据库中选择数据</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name;
+</code></pre>
+</li>
+</ul>
+<h3 id="条件查询">条件查询</h3>
+<h4 id="where">WHERE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于过滤记录</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+</code></pre>
+</li>
+</ul>
+<h4 id="and-or-not">AND, OR, NOT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于组合和反转条件</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2;
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2;
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+</code></pre>
+</li>
+</ul>
+<h3 id="模糊查询">模糊查询</h3>
+<h4 id="like">LIKE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于搜索匹配的字符串</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column LIKE pattern;
+</code></pre>
+</li>
+</ul>
+<h4 id="通配符">通配符</h4>
+<ul>
+<li>
+<p><code>%</code>: 代表零个、一个或多个字符。</p>
+</li>
+<li>
+<p><code>_</code>: 代表一个单一字符</p>
+<pre><code>SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';  -- 以&quot;a&quot;开头的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';  -- 以&quot;a&quot;结尾的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';  -- 包含&quot;or&quot;的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE '_r%';  -- 第二个字符是&quot;r&quot;的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a_%_%';  -- 以&quot;a&quot;开头且总长度至少为3的所有记录
+</code></pre>
+</li>
+</ul>
+<h3 id="范围查询">范围查询</h3>
+<h4 id="between">BETWEEN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 选取介于两个值之间的范围内的值</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column BETWEEN value1 AND value2;
+</code></pre>
+</li>
+</ul>
+<h4 id="in">IN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 选取匹配列表中的值</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column IN (value1, value2, ...);
+</code></pre>
+</li>
+</ul>
+<h3 id="聚合查询">聚合查询</h3>
+<h4 id="count-sum-avg-max-min">COUNT, SUM, AVG, MAX, MIN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 聚合函数，用于计算</p>
+<pre><code>SELECT COUNT(column) FROM table_name;  -- 计算行数
+SELECT SUM(column) FROM table_name;    -- 计算总和
+SELECT AVG(column) FROM table_name;    -- 计算平均值
+SELECT MAX(column) FROM table_name;    -- 计算最大值
+SELECT MIN(column) FROM table_name;    -- 计算最小值
+</code></pre>
+</li>
+</ul>
+<h3 id="分组查询">分组查询</h3>
+<h4 id="group-by">GROUP BY</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 按某列对结果集进行分组</p>
+<pre><code>SELECT column1, COUNT(column2)
+FROM table_name
+GROUP BY column1;
+</code></pre>
+</li>
+</ul>
+<h4 id="having">HAVING</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于对分组结果进行过滤</p>
+<pre><code>SELECT column1, COUNT(column2)
+FROM table_name
+GROUP BY column1
+HAVING COUNT(column2) &gt; value;
+</code></pre>
+</li>
+</ul>
+<h3 id="排序查询">排序查询</h3>
+<h4 id="order-by">ORDER BY</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 对结果集进行排序</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1 ASC;  -- 升序
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1 DESC;  -- 降序
+</code></pre>
+</li>
+</ul>
+<h3 id="联合查询">联合查询</h3>
+<h4 id="join">JOIN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 从多个表中选择数据</p>
+<ul>
+<li>
+<p>INNER JOIN: 只返回两个表中有匹配的行。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+INNER JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+<li>
+<p>LEFT JOIN: 返回包括左表中的所有记录和右表中匹配的记录。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+<li>
+<p>RIGHT JOIN: 返回包括右表中的所有记录和左表中匹配的记录。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+RIGHT JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+<li>
+<p>FULL OUTER JOIN: 返回两个表中的所有记录，当没有匹配时显示 NULL。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+FULL OUTER JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="子查询">子查询</h3>
+<h4 id="子查询-2">子查询</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 在另一个查询中的查询</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column = (SELECT column FROM table_name WHERE condition);
+</code></pre>
+</li>
+</ul>
+<h3 id="高级查询">高级查询</h3>
+<h4 id="union">UNION</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 合并两个或多个 SELECT 语句的结果集</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+UNION
+SELECT column1, column2, ...
+FROM table2;
+</code></pre>
+</li>
+</ul>
+<h4 id="exists">EXISTS</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 检查是否存在记录</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE EXISTS (SELECT column FROM table_name WHERE condition);
+</code></pre>
+</li>
+</ul>
+<h3 id="特殊关键字">特殊关键字</h3>
+<h4 id="distinct">DISTINCT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 返回唯一不同的值</p>
+<pre><code>SELECT DISTINCT column1, column2, ...
+FROM table_name;
+</code></pre>
+</li>
+</ul>
+<h4 id="limit">LIMIT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 指定返回的记录数。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+LIMIT number;
+</code></pre>
+</li>
+</ul>
+<h4 id="offset">OFFSET</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 指定开始返回记录的位置。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+LIMIT number OFFSET offset_value;
+</code></pre>
+</li>
+</ul>
+<h3 id="索引">索引</h3>
+<p>​	索引的作用相当于图书的目录，可以根据目录中的页码快速找到所需的内容。数据库使用索引以找到特定值，然后顺指针找到包含该值的行。在表中建立索引，然后在索引中找到符合查询条件的索引值，最后通过保存在索引中的 ROWID（相当于页码）快速找到表中对应的记录。索引的建立是表中比较有指向性的字段，相当于目录，比如说行政区域代码，同一个地域的行政区域代码都是相同的，那么给这一列加上索引，避免让它重复扫描，从而达到优化的目的。</p>
+<h4 id="b树索引">B+树索引</h4>
+<p>高度的平衡性：B+树是平衡树的一种，它会保持高度的平衡，从而保证查找、插入和删除操作的平均时间复杂度都是对数级别的，这样可以保证索引的查询性能稳定。</p>
+<p>节点可以存储更多的子节点：在B-tree中，每个节点可以包含多个元素和多个指向子节点的指针。在B+树中，非叶子节点仅用于索引，只含有键值和指向子节点的指针，不包含实际的数据记录；叶子节点包含所有的键值和指向数据记录的指针，这样可以减少查询时访问磁盘的次数。</p>
+<p>查询速度：由于B+树的非叶子节点不包含实际数据，所以在同样大小的内存页中，可以存储更多的键值和指针，这意味着在相同的IO次数下，可以查询到更多的数据，从而提高查询速度。</p>
+<p>范围查询：B+树的叶子节点是链接的，因此可以很容易地进行范围查询，只需要从叶子节点开始，沿链接遍历直到结束，不需要回到根节点。</p>
+<p>效率：相比于二叉树和其他数据结构，B+树的效率更高，因为它的IO操作更少，且查询时间复杂度更稳定。</p>
+<h4 id="索引失效">索引失效</h4>
+<ol>
+<li>查询条件使用了函数，导致不能直接利用索引。</li>
+<li>使用了不等于(!= 或者 &lt;&gt;)，导致无法完全利用索引。</li>
+<li>索引列参与了计算，使得优化器放弃使用索引。</li>
+<li>使用了LIKE关键字，且模式的开始是通配符(%xx)，导致无法使用索引。</li>
+<li>使用了OR条件，但是其中有些条件不是索引字段，导致整个OR条件使用不了索引。</li>
+<li>复合索引，但是没有遵守最左前缀规则，导致索引失效。</li>
+<li>查询的数据量过大，导致优化器决定全表扫描而不是使用索引。</li>
+<li>索引选择不当，比如在频繁更新的列上建立索引，可能导致性能问题。</li>
+</ol>
+<p>解决方法：</p>
+<ol>
+<li>尽量避免在查询条件中使用函数。</li>
+<li>尽可能让等值替换成等值比较。</li>
+<li>尽量避免在索引列上进行计算。</li>
+<li>尽量避免模式是通配符开始的LIKE查询。</li>
+<li>如果使用了OR，可以考虑将OR语句拆分成多个查询，并且每个查询都能利用索引。</li>
+<li>确保复合索引的字段顺序符合查询中的顺序。</li>
+<li>优化SQL查询，减少返回的数据量，比如使用LIMIT。</li>
+<li>根据实际情况，重新评估索引的有效性，可能需要创建或修改索引。</li>
+</ol>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://dhl2233.github.io/post/suan-fa-she-ji-bi-ji/" class="post-title gt-a-link">
+                    常用算法设计思想
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">日日行能走千里路，时时学能破万卷书</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Design by 刘冬辉<a href="https://github.com/dhl2233" target="_blank">个人github</a>
+    </div>
+    <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://dhl2233.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

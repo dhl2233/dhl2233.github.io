@@ -1,0 +1,459 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>git常用命令 | 刘冬辉的个人博客</title>
+
+<link rel="shortcut icon" href="https://dhl2233.github.io/favicon.ico?v=1716159646223">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://dhl2233.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+    
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            刘冬辉的个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1716159646223"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    git常用命令
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-10-04 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h3 id="git新建分支提交代码到分支">Git新建分支提交代码到分支</h3>
+<p><code>git clone xxx (xxx为刚刚复制的仓库链接）//代码下载到本地 git branch xxx (xxx填写你的分支名称)//新建分支 git branch -a//查看所有分支 git checkout xxx (xxx填写要切换的分支名称）//切换到某一分支 git add .//添加修改代码到缓存（注意最后的&quot;.&quot;前面有个空格 git commit -m &quot;xxx&quot; （xxx为本次提交代码的备注）//添加提交代码的备注 git push origin xxx （xxx为要提交代码的分支名称）//提交代码到指定分支</code></p>
+<h4 id="第一次提交代码">第一次提交代码</h4>
+<pre><code class="language-javascript">1、git init
+
+2、 git status
+
+3、git add .
+
+4、git commit -m 'init'
+
+5、创建远程仓库
+
+6、git  remote add origin  url//这边的URL跟的是你项目的地址
+
+7、git push -u origin  master
+
+1234567891011121314
+</code></pre>
+<h4 id="新建分支">新建分支</h4>
+<pre><code class="language-javascript">git branch
+
+git checkout -b 分支名   //创建分支并切换到该分支
+123
+</code></pre>
+<h4 id="合并分支">合并分支</h4>
+<pre><code class="language-javascript">git add .
+
+git commit -m '提交信息'
+
+git branch -a 查看远程分支
+
+git checkout master//切换到主分支
+
+git merger 分支名 //合并  如果报错再执行 ：git merge dev-login --allow-unrelated-histories
+
+git push
+</code></pre>
+<h4 id="git-clone">git clone</h4>
+<p>从远程仓库克隆一个版本库到本地。</p>
+<pre><code class="language-javascript"># 默认在当前目录下创建和版本库名相同的文件夹并下载版本到该文件夹下
+$ git clone &lt;远程仓库的网址&gt;
+
+# 指定本地仓库的目录
+$ git clone &lt;远程仓库的网址&gt; &lt;本地目录&gt;
+
+# -b 指定要克隆的分支，默认是master分支
+$ git clone &lt;远程仓库的网址&gt; -b &lt;分支名称&gt; &lt;本地目录&gt;
+</code></pre>
+<h4 id="git-init">git init</h4>
+<p>初始化项目所在目录，初始化后会在当前目录下出现一个名为 .git 的目录。</p>
+<pre><code class="language-javascript"># 初始化本地仓库，在当前目录下生成 .git 文件夹
+$ git init
+
+123
+</code></pre>
+<h4 id="git-status">git status</h4>
+<p>查看本地仓库的状态。</p>
+<pre><code class="language-javascript"># 查看本地仓库的状态
+$ git status
+
+# 以简短模式查看本地仓库的状态
+# 会显示两列，第一列是文件的状态，第二列是对应的文件
+# 文件状态：A 新增，M 修改，D 删除，?? 未添加到Git中
+$ git status -s
+</code></pre>
+<h4 id="git-remote">git remote</h4>
+<p>操作远程库。</p>
+<pre><code class="language-javascript"># 列出已经存在的远程仓库
+$ git remote
+
+# 列出远程仓库的详细信息，在别名后面列出URL地址
+$ git remote -v
+$ git remote --verbose
+
+# 添加远程仓库
+$ git remote add &lt;远程仓库的别名&gt; &lt;远程仓库的URL地址&gt;
+
+# 修改远程仓库的别名
+$ git remote rename &lt;原远程仓库的别名&gt; &lt;新的别名&gt;
+
+# 删除指定名称的远程仓库
+$ git remote remove &lt;远程仓库的别名&gt;
+
+# 修改远程仓库的 URL 地址
+$ git remote set-url &lt;远程仓库的别名&gt; &lt;新的远程仓库URL地址&gt;
+
+12345678910111213141516171819
+</code></pre>
+<h4 id="git-branch">git branch</h4>
+<p>操作 Git 的分支命令。</p>
+<pre><code class="language-javascript"># 列出本地的所有分支，当前所在分支以 &quot;*&quot; 标出
+$ git branch
+
+# 列出本地的所有分支并显示最后一次提交，当前所在分支以 &quot;*&quot; 标出
+$ git branch -v
+
+# 创建新分支，新的分支基于上一次提交建立
+$ git branch &lt;分支名&gt;
+
+# 修改分支名称
+# 如果不指定原分支名称则为当前所在分支
+$ git branch -m [&lt;原分支名称&gt;] &lt;新的分支名称&gt;
+# 强制修改分支名称
+$ git branch -M [&lt;原分支名称&gt;] &lt;新的分支名称&gt;
+
+# 删除指定的本地分支
+$ git branch -d &lt;分支名称&gt;
+
+# 强制删除指定的本地分支
+$ git branch -D &lt;分支名称&gt;
+</code></pre>
+<h4 id="git-checkout">git checkout</h4>
+<p>检出命令，用于创建、切换分支等。</p>
+<pre><code class="language-javascript"># 切换到已存在的指定分支
+$ git checkout &lt;分支名称&gt;
+
+# 创建并切换到指定的分支，保留所有的提交记录
+# 等同于 &quot;git branch&quot; 和 &quot;git checkout&quot; 两个命令合并
+$ git checkout -b &lt;分支名称&gt;
+
+# 创建并切换到指定的分支，删除所有的提交记录
+$ git checkout --orphan &lt;分支名称&gt;
+
+# 替换掉本地的改动，新增的文件和已经添加到暂存区的内容不受影响
+$ git checkout &lt;文件路径&gt;
+</code></pre>
+<h4 id="git-cherry-pick">git cherry-pick</h4>
+<p>把已经提交的记录合并到当前分支。</p>
+<pre><code class="language-javascript"># 把已经提交的记录合并到当前分支
+$ git cherry-pick &lt;commit ID&gt;
+
+123
+</code></pre>
+<h4 id="git-add">git add</h4>
+<p>把要提交的文件的信息添加到暂存区中。当使用 git <a href="https://so.csdn.net/so/search?q=commit&amp;spm=1001.2101.3001.7020">commit</a> 时，将依据暂存区中的内容来进行文件的提交。</p>
+<pre><code class="language-javascript"># 把指定的文件添加到暂存区中
+$ git add &lt;文件路径&gt;
+
+# 添加所有修改、已删除的文件到暂存区中
+$ git add -u [&lt;文件路径&gt;]
+$ git add --update [&lt;文件路径&gt;]
+
+# 添加所有修改、已删除、新增的文件到暂存区中，省略 &lt;文件路径&gt; 即为当前目录
+$ git add -A [&lt;文件路径&gt;]
+$ git add --all [&lt;文件路径&gt;]
+
+# 查看所有修改、已删除但没有提交的文件，进入一个子命令系统
+$ git add -i [&lt;文件路径&gt;]
+$ git add --interactive [&lt;文件路径&gt;]
+</code></pre>
+<h4 id="git-commit">git commit</h4>
+<p>将暂存区中的文件提交到本地仓库中。</p>
+<pre><code class="language-javascript"># 把暂存区中的文件提交到本地仓库，调用文本编辑器输入该次提交的描述信息
+$ git commit
+
+# 把暂存区中的文件提交到本地仓库中并添加描述信息
+$ git commit -m &quot;&lt;提交的描述信息&gt;&quot;
+
+# 把所有修改、已删除的文件提交到本地仓库中
+# 不包括未被版本库跟踪的文件，等同于先调用了 &quot;git add -u&quot;
+$ git commit -a -m &quot;&lt;提交的描述信息&gt;&quot;
+
+# 修改上次提交的描述信息
+$ git commit --amend
+
+12345678910111213
+</code></pre>
+<h4 id="git-fetch">git fetch</h4>
+<p>从远程仓库获取最新的版本到本地的 tmp 分支上。</p>
+<pre><code class="language-javascript"># 将远程仓库所有分支的最新版本全部取回到本地
+$ git fetch &lt;远程仓库的别名&gt;
+
+# 将远程仓库指定分支的最新版本取回到本地
+$ git fetch &lt;远程主机名&gt; &lt;分支名&gt;
+</code></pre>
+<h4 id="git-merge">git merge</h4>
+<p>合并分支。</p>
+<pre><code class="language-javascript"># 把指定的分支合并到当前所在的分支下
+$ git merge &lt;分支名称&gt;
+
+123
+</code></pre>
+<h4 id="git-diff">git diff</h4>
+<p>比较版本之间的差异。</p>
+<pre><code class="language-javascript"># 比较当前文件和暂存区中文件的差异，显示没有暂存起来的更改
+$ git diff
+
+# 比较暂存区中的文件和上次提交时的差异
+$ git diff --cached
+$ git diff --staged
+
+# 比较当前文件和上次提交时的差异
+$ git diff HEAD
+
+# 查看从指定的版本之后改动的内容
+$ git diff &lt;commit ID&gt;
+
+# 比较两个分支之间的差异
+$ git diff &lt;分支名称&gt; &lt;分支名称&gt;
+
+# 查看两个分支分开后各自的改动内容
+$ git diff &lt;分支名称&gt;...&lt;分支名称&gt;
+</code></pre>
+<h4 id="git-pull">git pull</h4>
+<p>从远程仓库获取最新版本并合并到本地。<br>
+首先会执行 git fetch，然后执行 git merge，把获取的分支的 HEAD 合并到当前分支。</p>
+<pre><code class="language-javascript"># 从远程仓库获取最新版本。
+$ git pull
+
+123
+</code></pre>
+<h4 id="git-push">git push</h4>
+<p>把本地仓库的提交推送到远程仓库。</p>
+<pre><code class="language-javascript"># 把本地仓库的分支推送到远程仓库的指定分支
+$ git push &lt;远程仓库的别名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+
+# 删除指定的远程仓库的分支
+$ git push &lt;远程仓库的别名&gt; :&lt;远程分支名&gt;
+$ git push &lt;远程仓库的别名&gt; --delete &lt;远程分支名&gt;
+
+1234567
+</code></pre>
+<h4 id="git-log">git log</h4>
+<p>显示提交的记录。</p>
+<pre><code class="language-javascript"># 打印所有的提交记录
+$ git log
+
+# 打印从第一次提交到指定的提交的记录
+$ git log &lt;commit ID&gt;
+
+# 打印指定数量的最新提交的记录
+$ git log -&lt;指定的数量&gt;
+</code></pre>
+<h4 id="git-reset">git reset</h4>
+<p>还原提交记录。</p>
+<pre><code class="language-javascript"># 重置暂存区，但文件不受影响
+# 相当于将用 &quot;git add&quot; 命令更新到暂存区的内容撤出暂存区，可以指定文件
+# 没有指定 commit ID 则默认为当前 HEAD
+$ git reset [&lt;文件路径&gt;]
+$ git reset --mixed [&lt;文件路径&gt;]
+
+# 将 HEAD 的指向改变，撤销到指定的提交记录，文件未修改
+$ git reset &lt;commit ID&gt;
+$ git reset --mixed &lt;commit ID&gt;
+
+# 将 HEAD 的指向改变，撤销到指定的提交记录，文件未修改
+# 相当于调用 &quot;git reset --mixed&quot; 命令后又做了一次 &quot;git add&quot;
+$ git reset --soft &lt;commit ID&gt;
+
+# 将 HEAD 的指向改变，撤销到指定的提交记录，文件也修改了
+$ git reset --hard &lt;commit ID&gt;
+
+1234567891011121314151617
+</code></pre>
+<h4 id="git-revert">git revert</h4>
+<p>生成一个新的提交来撤销某次提交，此次提交之前的所有提交都会被保留。</p>
+<pre><code class="language-javascript"># 生成一个新的提交来撤销某次提交
+$ git revert &lt;commit ID&gt;
+
+123
+</code></pre>
+<h4 id="git-tag">git tag</h4>
+<p>操作标签的命令</p>
+<pre><code class="language-javascript"># 打印所有的标签
+$ git tag
+
+# 添加轻量标签，指向提交对象的引用，可以指定之前的提交记录
+$ git tag &lt;标签名称&gt; [&lt;commit ID&gt;]
+
+# 添加带有描述信息的附注标签，可以指定之前的提交记录
+$ git tag -a &lt;标签名称&gt; -m &lt;标签描述信息&gt; [&lt;commit ID&gt;]
+
+# 切换到指定的标签
+$ git checkout &lt;标签名称&gt;
+
+# 查看标签的信息
+$ git show &lt;标签名称&gt;
+
+# 删除指定的标签
+$ git tag -d &lt;标签名称&gt;
+
+# 将指定的标签提交到远程仓库
+$ git push &lt;远程仓库的别名&gt; &lt;标签名称&gt;
+
+# 将本地所有的标签全部提交到远程仓库
+$ git push &lt;远程仓库的别名&gt; –tags
+
+123456789101112131415161718192021222324
+</code></pre>
+<h4 id="git-mv">git mv</h4>
+<p>重命名文件或者文件夹</p>
+<pre><code class="language-javascript"># 重命名指定的文件或者文件夹
+$ git mv &lt;源文件/文件夹&gt; &lt;目标文件/文件夹&gt;
+
+123
+</code></pre>
+<h4 id="git-rm">git rm</h4>
+<p>删除文件或者文件夹。</p>
+<pre><code class="language-javascript"># 移除跟踪指定的文件，并从本地仓库的文件夹中删除
+$ git rm &lt;文件路径&gt;
+
+# 移除跟踪指定的文件夹，并从本地仓库的文件夹中删除
+$ git rm -r &lt;文件夹路径&gt;
+
+# 移除跟踪指定的文件，在本地仓库的文件夹中保留该文件
+$ git rm --cached
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://dhl2233.github.io/post/shu-ju-ku-she-ji-bi-ji/" class="post-title gt-a-link">
+                    数据库设计
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">日日行能走千里路，时时学能破万卷书</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Design by 刘冬辉<a href="https://github.com/dhl2233" target="_blank">个人github</a>
+    </div>
+    <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://dhl2233.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

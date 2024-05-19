@@ -1,0 +1,2052 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://dhl2233.github.io</id>
+    <title>刘冬辉的个人博客</title>
+    <updated>2024-05-19T23:00:48.252Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://dhl2233.github.io"/>
+    <link rel="self" href="https://dhl2233.github.io/atom.xml"/>
+    <subtitle>日日行能走千里路，时时学能破万卷书</subtitle>
+    <logo>https://dhl2233.github.io/images/avatar.png</logo>
+    <icon>https://dhl2233.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, 刘冬辉的个人博客</rights>
+    <entry>
+        <title type="html"><![CDATA[常用设计模式思想]]></title>
+        <id>https://dhl2233.github.io/post/chang-yong-she-ji-mo-shi-si-xiang/</id>
+        <link href="https://dhl2233.github.io/post/chang-yong-she-ji-mo-shi-si-xiang/">
+        </link>
+        <updated>2024-02-23T21:15:21.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="常用设计模式思想">常用设计模式思想</h2>
+<h3 id="工厂模式">工厂模式</h3>
+<p>工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一，这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
+<p>工厂模式提供了一种创建对象的方式，而无需指定要创建的具体类。</p>
+<p>工厂模式属于创建型模式，它在创建对象时提供了一种封装机制，将实际创建对象的代码与使用代码分离。</p>
+<h2 id="介绍">介绍</h2>
+<p>**意图：**定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。</p>
+<p>**主要解决：**主要解决接口选择的问题。</p>
+<p>**何时使用：**我们明确地计划不同条件下创建不同实例时。</p>
+<p>**如何解决：**让其子类实现工厂接口，返回的也是一个抽象的产品。</p>
+<p>**关键代码：**创建过程在其子类执行。</p>
+<p><strong>应用实例：</strong> 1、您需要一辆汽车，可以直接从工厂里面提货，而不用去管这辆汽车是怎么做出来的，以及这个汽车里面的具体实现。 2、在 Hibernate 中，如果需要更换数据库，工厂模式同样发挥了作用。只需简单地更改方言（Dialect）和数据库驱动（Driver），就能够实现对不同数据库的切换。</p>
+<p><strong>优点：</strong> 1、一个调用者想创建一个对象，只要知道其名称就可以了。  2、扩展性高，如果想增加一个产品，只要扩展一个工厂类就可以。 3、屏蔽产品的具体实现，调用者只关心产品的接口。</p>
+<p>**缺点：**每次增加一个产品时，都需要增加一个具体类和对象实现工厂，使得系统中类的个数成倍增加，在一定程度上增加了系统的复杂度，同时也增加了系统具体类的依赖。这并不是什么好事。</p>
+<p><strong>使用场景：</strong> 1、日志记录器：记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。 2、数据库访问，当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。 3、设计一个连接服务器的框架，需要三个协议，&quot;POP3&quot;、&quot;IMAP&quot;、&quot;HTTP&quot;，可以把这三个作为产品类，共同实现一个接口。</p>
+<p>**注意事项：**作为一种创建类模式，在任何需要生成复杂对象的地方，都可以使用工厂方法模式。有一点需要注意的地方就是复杂对象适合使用工厂模式，而简单对象，特别是只需要通过 new 就可以完成创建的对象，无需使用工厂模式。如果使用工厂模式，就需要引入一个工厂类，会增加系统的复杂度。</p>
+<p><strong>工厂模式包含以下几个核心角色：</strong></p>
+<ul>
+<li>抽象产品（Abstract Product）：定义了产品的共同接口或抽象类。它可以是具体产品类的父类或接口，规定了产品对象的共同方法。</li>
+<li>具体产品（Concrete Product）：实现了抽象产品接口，定义了具体产品的特定行为和属性。</li>
+<li>抽象工厂（Abstract Factory）：声明了创建产品的抽象方法，可以是接口或抽象类。它可以有多个方法用于创建不同类型的产品。</li>
+<li>具体工厂（Concrete Factory）：实现了抽象工厂接口，负责实际创建具体产品的对象。</li>
+</ul>
+<h3 id="单例模式">单例模式</h3>
+<p>单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
+<p>这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。</p>
+<p>单例模式是一种创建型设计模式，它确保一个类只有一个实例，并提供了一个全局访问点来访问该实例。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>1、单例类只能有一个实例。</li>
+<li>2、单例类必须自己创建自己的唯一实例。</li>
+<li>3、单例类必须给所有其他对象提供这一实例。</li>
+</ul>
+<h2 id="介绍-2">介绍</h2>
+<p>**意图：**保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
+<p>**主要解决：**一个全局使用的类频繁地创建与销毁。</p>
+<p>**何时使用：**当您想控制实例数目，节省系统资源的时候。</p>
+<p>**如何解决：**判断系统是否已经有这个单例，如果有则返回，如果没有则创建。</p>
+<p>**关键代码：**构造函数是私有的。</p>
+<p><strong>应用实例：</strong></p>
+<ul>
+<li>1、一个班级只有一个班主任。</li>
+<li>2、Windows 是多进程多线程的，在操作一个文件的时候，就不可避免地出现多个进程或线程同时操作一个文件的现象，所以所有文件的处理必须通过唯一的实例来进行。</li>
+<li>3、一些设备管理器常常设计为单例模式，比如一个电脑有两台打印机，在输出的时候就要处理不能两台打印机打印同一个文件。</li>
+</ul>
+<p><strong>优点：</strong></p>
+<ul>
+<li>1、在内存里只有一个实例，减少了内存的开销，尤其是频繁的创建和销毁实例（比如管理学院首页页面缓存）。</li>
+<li>2、避免对资源的多重占用（比如写文件操作）。</li>
+</ul>
+<p>**缺点：**没有接口，不能继承，与单一职责原则冲突，一个类应该只关心内部逻辑，而不关心外面怎么样来实例化。</p>
+<p><strong>使用场景：</strong></p>
+<ul>
+<li>1、要求生产唯一序列号。</li>
+<li>2、WEB 中的计数器，不用每次刷新都在数据库里加一次，用单例先缓存起来。</li>
+<li>3、创建的一个对象需要消耗的资源过多，比如 I/O 与数据库的连接等。</li>
+</ul>
+<p>**注意事项：**getInstance() 方法中需要使用同步锁 synchronized (Singleton.class) 防止多线程同时进入造成 instance 被多次实例化。</p>
+<h3 id="原型模式">原型模式</h3>
+<p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式之一。</p>
+<p>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+<h2 id="介绍-3">介绍</h2>
+<p>**意图：**用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</p>
+<p>**主要解决：**在运行期建立和删除原型。</p>
+<p><strong>何时使用：</strong> 1、当一个系统应该独立于它的产品创建，构成和表示时。 2、当要实例化的类是在运行时刻指定时，例如，通过动态装载。 3、为了避免创建一个与产品类层次平行的工厂类层次时。 4、当一个类的实例只能有几个不同状态组合中的一种时。建立相应数目的原型并克隆它们可能比每次用合适的状态手工实例化该类更方便一些。</p>
+<p>**如何解决：**利用已有的一个原型对象，快速地生成和原型对象一样的实例。</p>
+<p><strong>关键代码：</strong> 1、实现克隆操作，在 JAVA 实现 Cloneable 接口，重写 clone()，在 .NET 中可以使用 Object 类的 MemberwiseClone() 方法来实现对象的浅拷贝或通过序列化的方式来实现深拷贝。 2、原型模式同样用于隔离类对象的使用者和具体类型（易变类）之间的耦合关系，它同样要求这些&quot;易变类&quot;拥有稳定的接口。</p>
+<p><strong>应用实例：</strong> 1、细胞分裂。 2、JAVA 中的 Object clone() 方法。</p>
+<p><strong>优点：</strong> 1、性能提高。 2、逃避构造函数的约束。</p>
+<p><strong>缺点：</strong> 1、配备克隆方法需要对类的功能进行通盘考虑，这对于全新的类不是很难，但对于已有的类不一定很容易，特别当一个类引用不支持串行化的间接对象，或者引用含有循环结构的时候。 2、必须实现 Cloneable 接口。</p>
+<p><strong>使用场景：</strong> 1、资源优化场景。 2、类初始化需要消化非常多的资源，这个资源包括数据、硬件资源等。 3、性能和安全要求的场景。 4、通过 new 产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式。 5、一个对象多个修改者的场景。 6、一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用。 7、在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现，通过 clone 的方法创建一个对象，然后由工厂方法提供给调用者。原型模式已经与 Java 融为浑然一体，大家可以随手拿来使用。</p>
+<p>**注意事项：**与通过对一个类进行实例化来构造新对象不同的是，原型模式是通过拷贝一个现有对象生成新对象的。浅拷贝实现 Cloneable，重写，深拷贝是通过实现 Serializable 读取二进制流。</p>
+<h1 id="过滤器模式">过滤器模式</h1>
+<p>过滤器模式（Filter Pattern）或标准模式（Criteria  Pattern）是一种设计模式，这种模式允许开发人员使用不同的标准来过滤一组对象，通过逻辑运算以解耦的方式把它们连接起来。这种类型的设计模式属于结构型模式，它结合多个标准来获得单一标准。</p>
+<h1 id="代理模式">代理模式</h1>
+<p>在代理模式（Proxy Pattern）中，一个类代表另一个类的功能。这种类型的设计模式属于结构型模式。</p>
+<p>在代理模式中，我们创建具有现有对象的对象，以便向外界提供功能接口。</p>
+<h2 id="介绍-4">介绍</h2>
+<p>**意图：**为其他对象提供一种代理以控制对这个对象的访问。</p>
+<p>**主要解决：**在直接访问对象时带来的问题，比如说：要访问的对象在远程的机器上。在面向对象系统中，有些对象由于某些原因（比如对象创建开销很大，或者某些操作需要安全控制，或者需要进程外的访问），直接访问会给使用者或者系统结构带来很多麻烦，我们可以在访问此对象时加上一个对此对象的访问层。</p>
+<p>**何时使用：**想在访问一个类时做一些控制。</p>
+<p>**如何解决：**增加中间层。</p>
+<p>**关键代码：**实现与被代理类组合。</p>
+<p><strong>应用实例：</strong> 1、Windows 里面的快捷方式。 2、猪八戒去找高翠兰结果是孙悟空变的，可以这样理解：把高翠兰的外貌抽象出来，高翠兰本人和孙悟空都实现了这个接口，猪八戒访问高翠兰的时候看不出来这个是孙悟空，所以说孙悟空是高翠兰代理类。 3、买火车票不一定在火车站买，也可以去代售点。 4、一张支票或银行存单是账户中资金的代理。支票在市场交易中用来代替现金，并提供对签发人账号上资金的控制。 5、spring aop。</p>
+<p><strong>优点：</strong> 1、职责清晰。 2、高扩展性。 3、智能化。</p>
+<p><strong>缺点：</strong> 1、由于在客户端和真实主题之间增加了代理对象，因此有些类型的代理模式可能会造成请求的处理速度变慢。 2、实现代理模式需要额外的工作，有些代理模式的实现非常复杂。</p>
+<p>**使用场景：**按职责来划分，通常有以下使用场景： 1、远程代理。 2、虚拟代理。 3、Copy-on-Write 代理。 4、保护（Protect or Access）代理。 5、Cache代理。 6、防火墙（Firewall）代理。 7、同步化（Synchronization）代理。 8、智能引用（Smart Reference）代理。</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>1、和适配器模式的区别：适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口。</li>
+<li>2、和装饰器模式的区别：装饰器模式为了增强功能，而代理模式是为了加以控制。</li>
+</ul>
+<p><strong>主要涉及到以下几个核心角色：</strong></p>
+<ul>
+<li><strong>抽象主题（Subject）:</strong>
+<ul>
+<li>定义了真实主题和代理主题的共同接口，这样在任何使用真实主题的地方都可以使用代理主题。</li>
+</ul>
+</li>
+<li><strong>真实主题（Real Subject）:</strong>
+<ul>
+<li>实现了抽象主题接口，是代理对象所代表的真实对象。客户端直接访问真实主题，但在某些情况下，可以通过代理主题来间接访问。</li>
+</ul>
+</li>
+<li><strong>代理（Proxy）:</strong>
+<ul>
+<li>实现了抽象主题接口，并持有对真实主题的引用。代理主题通常在真实主题的基础上提供一些额外的功能，例如延迟加载、权限控制、日志记录等。</li>
+</ul>
+</li>
+<li><strong>客户端（Client）:</strong>
+<ul>
+<li>使用抽象主题接口来操作真实主题或代理主题，不需要知道具体是哪一个实现类。</li>
+</ul>
+</li>
+</ul>
+<h1 id="观察者模式">观察者模式</h1>
+<p>观察者模式是一种行为型设计模式，它定义了一种一对多的依赖关系，当一个对象的状态发生改变时，其所有依赖者都会收到通知并自动更新。</p>
+<p>当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知依赖它的对象。观察者模式属于行为型模式。</p>
+<h2 id="介绍-5">介绍</h2>
+<p>**意图：**定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。</p>
+<p>**主要解决：**一个对象状态改变给其他对象通知的问题，而且要考虑到易用和低耦合，保证高度的协作。</p>
+<p>**何时使用：**一个对象（目标对象）的状态发生改变，所有的依赖对象（观察者对象）都将得到通知，进行广播通知。</p>
+<p>**如何解决：**使用面向对象技术，可以将这种依赖关系弱化。</p>
+<p>**关键代码：**在抽象类里有一个 ArrayList 存放观察者们。</p>
+<p><strong>应用实例：</strong> 1、拍卖的时候，拍卖师观察最高标价，然后通知给其他竞价者竞价。 2、西游记里面悟空请求菩萨降服红孩儿，菩萨洒了一地水招来一个老乌龟，这个乌龟就是观察者，他观察菩萨洒水这个动作。</p>
+<p><strong>优点：</strong> 1、观察者和被观察者是抽象耦合的。 2、建立一套触发机制。</p>
+<p><strong>缺点：</strong> 1、如果一个被观察者对象有很多的直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。 2、如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。 3、观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。</p>
+<p><strong>使用场景：</strong></p>
+<ul>
+<li>一个抽象模型有两个方面，其中一个方面依赖于另一个方面。将这些方面封装在独立的对象中使它们可以各自独立地改变和复用。</li>
+<li>一个对象的改变将导致其他一个或多个对象也发生改变，而不知道具体有多少对象将发生改变，可以降低对象之间的耦合度。</li>
+<li>一个对象必须通知其他对象，而并不知道这些对象是谁。</li>
+<li>需要在系统中创建一个触发链，A对象的行为将影响B对象，B对象的行为将影响C对象……，可以使用观察者模式创建一种链式触发机制。</li>
+</ul>
+<p><strong>注意事项：</strong> 1、JAVA 中已经有了对观察者模式的支持类。 2、避免循环引用。 3、如果顺序执行，某一观察者错误会导致系统卡壳，一般采用异步方式。</p>
+<p><strong>观察者模式包含以下几个核心角色：</strong></p>
+<ul>
+<li>主题（Subject）：也称为被观察者或可观察者，它是具有状态的对象，并维护着一个观察者列表。主题提供了添加、删除和通知观察者的方法。</li>
+<li>观察者（Observer）：观察者是接收主题通知的对象。观察者需要实现一个更新方法，当收到主题的通知时，调用该方法进行更新操作。</li>
+<li>具体主题（Concrete Subject）：具体主题是主题的具体实现类。它维护着观察者列表，并在状态发生改变时通知观察者。</li>
+<li>具体观察者（Concrete Observer）：具体观察者是观察者的具体实现类。它实现了更新方法，定义了在收到主题通知时需要执行的具体操作。</li>
+</ul>
+<p>观察者模式通过将主题和观察者解耦，实现了对象之间的松耦合。当主题的状态发生改变时，所有依赖于它的观察者都会收到通知并进行相应的更新。</p>
+<h1 id="拦截过滤器模式">拦截过滤器模式</h1>
+<p>拦截过滤器模式（Intercepting Filter  Pattern）用于对应用程序的请求或响应做一些预处理/后处理。定义过滤器，并在把请求传给实际目标应用程序之前应用在请求上。过滤器可以做认证/授权/记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体。</p>
+<ul>
+<li><strong>过滤器（Filter）</strong> - 过滤器在请求处理程序执行请求之前或之后，执行某些任务。</li>
+<li><strong>过滤器链（Filter Chain）</strong> - 过滤器链带有多个过滤器，并在 Target 上按照定义的顺序执行这些过滤器。</li>
+<li><strong>Target</strong> - Target 对象是请求处理程序。</li>
+<li><strong>过滤管理器（Filter Manager）</strong> - 过滤管理器管理过滤器和过滤器链。</li>
+<li><strong>客户端（Client）</strong> - Client 是向 Target 对象发送请求的对象。</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[缓存中间件Redis使用]]></title>
+        <id>https://dhl2233.github.io/post/huan-cun-zhong-jian-jian-redis-shi-yong/</id>
+        <link href="https://dhl2233.github.io/post/huan-cun-zhong-jian-jian-redis-shi-yong/">
+        </link>
+        <updated>2023-10-06T07:03:43.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="基础数据结构及使用场景">基础数据结构及使用场景</h2>
+<h3 id="1-字符串-string">1. 字符串 (String)</h3>
+<p>字符串是 Redis 最基本的数据类型，一个键对应一个值。字符串类型的值可以是文本、数字或二进制数据，最大存储长度为 512 MB。</p>
+<h4 id="常用场景">常用场景：</h4>
+<ul>
+<li><strong>缓存</strong>：将频繁访问的数据（如用户信息、配置参数）缓存到 Redis，以提高访问速度。</li>
+<li><strong>计数器</strong>：通过 <code>INCR</code> 和 <code>DECR</code> 操作实现计数器功能，如网站访问量、点赞数。</li>
+<li><strong>会话存储</strong>：存储用户会话信息，例如登录状态、购物车内容。</li>
+<li><strong>共享令牌</strong>：存储 API 访问令牌、验证码等短期数据。</li>
+<li><strong>分布式锁</strong>：<br>
+Redis String 还可以用作分布式锁。在分布式系统中，多个进程或线程可能同时访问同一个资源，为了避免竞争条件，我们需要使用锁来保证同一时间只有一个进程或线程可以访问该资源。Redis 提供了setnx命令，可以将一个 String 类型的数据作为锁，如果该数据不存在，则创建锁并返回 1，否则返回 0。例如，我们可以使用setnx命令创建一个名为“lock”的锁，如果返回 1，则表示当前进程或线程获得了锁，可以访问资源，否则需要等待。</li>
+</ul>
+<h3 id="2-哈希-hash">2. 哈希 (Hash)</h3>
+<p>哈希是一个键值对集合，适用于存储对象。一个哈希键可以包含多个字段，每个字段都有一个值。</p>
+<h4 id="常用场景-2">常用场景：</h4>
+<ul>
+<li><strong>用户信息</strong>：存储用户信息（如用户名、密码、邮箱），每个字段对应一个属性。</li>
+<li><strong>配置存储</strong>：存储应用配置参数，便于集中管理和动态更新。</li>
+<li><strong>对象存储</strong>：存储结构化的数据，如商品信息、订单详情。</li>
+</ul>
+<h3 id="3-列表-list">3. 列表 (List)</h3>
+<p>列表是一个有序的字符串链表，可以从两端插入和移除元素。列表按插入顺序排序。</p>
+<h4 id="常用场景-3">常用场景：</h4>
+<ul>
+<li><strong>消息队列</strong>：实现简单的消息队列，通过 <code>LPUSH</code> 和 <code>RPOP</code> 进行消息的入队和出队操作。</li>
+<li><strong>任务队列</strong>：存储待处理的任务列表，实现任务的顺序处理。</li>
+<li><strong>最新消息</strong>：存储最新消息、活动日志等，按时间顺序追加。</li>
+</ul>
+<h3 id="4-集合-set">4. 集合 (Set)</h3>
+<p>集合是一个无序的字符串集合，集合内的元素不允许重复。Redis 提供集合的交集、并集、差集等操作。</p>
+<h4 id="常用场景-4">常用场景：</h4>
+<ul>
+<li><strong>标签系统</strong>：存储用户标签、文章标签，实现标签的交集和并集查询。</li>
+<li><strong>好友关系</strong>：存储用户的好友列表，进行好友推荐、共同好友查找。</li>
+<li><strong>去重</strong>：存储需要去重的数据集合，如唯一访问者、活跃用户。</li>
+</ul>
+<h3 id="5-有序集合-sorted-set">5. 有序集合 (Sorted Set)</h3>
+<p>有序集合类似于集合，但每个元素都会关联一个分数，集合中的元素按分数排序。可以根据分数范围进行查询。</p>
+<h4 id="常用场景-5">常用场景：</h4>
+<ul>
+<li><strong>排行榜</strong>：存储和查询排行榜，如游戏积分榜、竞赛排名。</li>
+<li><strong>延迟队列</strong>：实现带有优先级的任务队列，根据任务的优先级或到期时间排序。</li>
+<li><strong>时间序列数据</strong>：存储时间序列数据，如股票价格、传感器数据，并按时间顺序查询。</li>
+</ul>
+<h2 id="持久化">持久化</h2>
+<h3 id="1-rdbredis-database-backup">1. RDB（Redis Database Backup）</h3>
+<p>RDB 是 Redis 的默认持久化方式，它通过生成内存数据的快照并将其保存到磁盘来实现持久化。</p>
+<h4 id="配置-rdb">配置 RDB</h4>
+<p>RDB 持久化可以通过 Redis 配置文件 <code>redis.conf</code> 进行配置：</p>
+<pre><code>conf复制代码# 配置触发 RDB 快照的条件
+save 900 1      # 如果 900 秒内至少有 1 个 key 发生变化，则触发快照
+save 300 10     # 如果 300 秒内至少有 10 个 key 发生变化，则触发快照
+save 60 10000   # 如果 60 秒内至少有 10000 个 key 发生变化，则触发快照
+
+# RDB 文件保存路径
+dir /var/lib/redis
+
+# RDB 文件名
+dbfilename dump.rdb
+
+# RDB 持久化时是否压缩数据
+rdbcompression yes
+
+# 是否校验 RDB 文件的完整性
+rdbchecksum yes
+</code></pre>
+<h4 id="手动触发-rdb-快照">手动触发 RDB 快照</h4>
+<p>可以通过 Redis 命令手动触发 RDB 快照：</p>
+<pre><code>sh复制代码# 生成 RDB 快照（同步执行）
+SAVE
+
+# 生成 RDB 快照（异步执行）
+BGSAVE
+</code></pre>
+<h3 id="2-aofappend-only-file">2. AOF（Append-Only File）</h3>
+<p>AOF 持久化通过将每个写操作记录到日志文件来实现，能够更细粒度地记录数据变化，提供更好的数据恢复能力。</p>
+<h4 id="配置-aof">配置 AOF</h4>
+<p>AOF 持久化也可以通过 Redis 配置文件 <code>redis.conf</code> 进行配置：</p>
+<pre><code>conf复制代码# 启用 AOF 持久化
+appendonly yes
+
+# AOF 文件名
+appendfilename &quot;appendonly.aof&quot;
+
+# AOF 写入策略
+# 每个写操作都立即 fsync
+appendfsync always
+# 每秒 fsync 一次（推荐）
+appendfsync everysec
+# 由操作系统决定何时 fsync
+appendfsync no
+
+# AOF 文件的重写机制
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+</code></pre>
+<h4 id="手动触发-aof-重写">手动触发 AOF 重写</h4>
+<p>可以通过 Redis 命令手动触发 AOF 文件重写：</p>
+<pre><code>sh复制代码# 手动触发 AOF 重写（异步执行）
+BGREWRITEAOF
+</code></pre>
+<h3 id="3-rdb-和-aof-的比较">3. RDB 和 AOF 的比较</h3>
+<ul>
+<li><strong>RDB</strong>：
+<ul>
+<li>优点：生成的文件紧凑，适合用于备份和灾难恢复。</li>
+<li>缺点：快照之间的数据可能会丢失（取决于配置的快照频率）。</li>
+</ul>
+</li>
+<li><strong>AOF</strong>：
+<ul>
+<li>优点：提供更高的数据安全性，可以设置为每秒写入一次（<code>appendfsync everysec</code>），数据丢失时间窗口更小。</li>
+<li>缺点：生成的文件较大，重写时可能会影响性能。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-同时使用-rdb-和-aof">4. 同时使用 RDB 和 AOF</h3>
+<p>Redis 允许同时启用 RDB 和 AOF 持久化机制，以利用两者的优势。配置文件如下：</p>
+<pre><code>conf复制代码# 启用 RDB
+save 900 1
+save 300 10
+save 60 10000
+
+# 启用 AOF
+appendonly yes
+appendfilename &quot;appendonly.aof&quot;
+appendfsync everysec
+</code></pre>
+<h3 id="5-恢复数据">5. 恢复数据</h3>
+<h4 id="从-rdb-文件恢复数据">从 RDB 文件恢复数据</h4>
+<p>当 Redis 启动时，如果检测到 RDB 文件 <code>dump.rdb</code>，则会自动加载数据。</p>
+<h4 id="从-aof-文件恢复数据">从 AOF 文件恢复数据</h4>
+<p>当 Redis 启动时，如果检测到 AOF 文件 <code>appendonly.aof</code>，则会优先加载 AOF 文件的数据。</p>
+<h3 id="示例配置">示例配置</h3>
+<p>以下是一个示例 <code>redis.conf</code> 文件的配置，结合了 RDB 和 AOF 的持久化机制：</p>
+<pre><code>conf复制代码# RDB 持久化配置
+save 900 1
+save 300 10
+save 60 10000
+dir /var/lib/redis
+dbfilename dump.rdb
+rdbcompression yes
+rdbchecksum yes
+
+# AOF 持久化配置
+appendonly yes
+appendfilename &quot;appendonly.aof&quot;
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+</code></pre>
+<h2 id="主从哨兵模式搭建">主从+哨兵模式搭建</h2>
+<p>一、部署前准备</p>
+<p>1、准备三台redis服务器<br>
+master 192.168.1.10<br>
+slave1 192.168.1.11<br>
+slave2 192.168.1.12</p>
+<p>2、创建ssh/scp秘钥（方便安装、不用到三台服务器上做重复操作），创建后上传给其他两台服务器。三台服务器做同样的操作，把后面的IP改一下就行</p>
+<pre><code>[root@master ~]# cd .ssh
+[root@master .ssh]# ssh-keygen	#一直回车就行
+[root@master .ssh]# ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.1.11
+[root@master .ssh]# ssh-copy-id -i /root/.ssh/id_rsa.pub root@192.168.1.12
+</code></pre>
+<h3 id="二-安装redis">二、安装Redis</h3>
+<p>1、在三台服务器上安装redis<br>
+下载redis-5.0.5.tar.gz</p>
+<pre><code>[root@master ~]# cd /opt/
+[root@master opt]# wget http://download.redis.io/releases/redis-5.0.5.tar.gz
+</code></pre>
+<p>2、安装依赖和Redis</p>
+<pre><code>[root@master opt]# yum -y install gcc   #没有yum源的自行找gcc包
+[root@master opt]# tar -zxvf redis-5.0.5.tar.gz
+[root@master opt]# cd redis-5.0.5
+[root@master opt]# make MALLOC=libc
+[root@master opt]# make
+[root@master opt]# cd src
+[root@master opt]# make install PREFIX=/usr/local/redis #指定安装目录至/usr/local/redis
+[root@master opt]# mkdir /usr/local/redis/etc/
+</code></pre>
+<p>3、修改Redis配置文件（三台服务器同样操作）<br>
+先把配置文件复制到我们指定的目录下</p>
+<pre><code>[root@master opt]# cp /opt/redis-5.0.5/redis.conf /usr/local/redis/etc/
+[root@master opt]# cd /usr/local/redis/etc/
+[root@master etc]# vim redis.conf
+</code></pre>
+<p>修改以下内容</p>
+<pre><code>daemonize no改为daemonize yes  #redis后台启动
+requirepass foobared改为requirepass 123456	#设置redis密码
+bind 127.0.0.1改为#bind 127.0.0.1	#注释掉此行
+pidfile /usr/local/redis/run/redis_6379.pid 	
+logfile &quot;/usr/local/redis/logs/redis.log&quot;
+dir /usr/local/redis/dbcache/
+</code></pre>
+<p>:wq保存退出</p>
+<p>4、把配置文件上传给其他两台服务器</p>
+<pre><code>[root@master etc]# scp -r /usr/local/redis/etc/redis.conf root@192.168.1.11:/usr/local/redis/etc/redis.conf
+[root@master etc]# scp -r /usr/local/redis/etc/redis.conf root@192.168.1.12:/usr/local/redis/etc/redis.conf
+</code></pre>
+<p>5、创建配置文件中修改的pid、log、dbcache文件（三台服务器同样操作）</p>
+<pre><code>[root@master etc]# mkdir /usr/local/redis/run
+[root@master etc]# touch /usr/local/redis/run/redis_6379.pid
+[root@master etc]# mkdir /usr/local/redis/logs
+[root@master etc]# touch /usr/local/redis/logs/redis.log
+[root@master etc]# mkdir /usr/local/redis/dbcache
+</code></pre>
+<p>设置Redis实用systemctl方式启动（三台服务器做同样操作）</p>
+<pre><code>[root@master etc]# cd /lib/systemd/system
+[root@master etc]# vim redis.service
+[Unit]
+Description=Redis
+After=network.target
+[Service]
+ExecStart=/opt/redis-5.0.5/src/redis-server /usr/local/redis/etc/redis.conf --daemonize no
+ExecStop=/opt/redis-5.0.5/src/redis-cli -h 127.0.0.1 -p 6379 shutdown
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>保存退出<br>
+创建链接并刷新配置</p>
+<pre><code>[root@master system]# ln -s /lib/systemd/system/redis.service /etc/systemd/system/multi-user.target.wants/redis.service
+[root@master system]# systemctl daemon-reload
+</code></pre>
+<p>关闭防火墙、selinux</p>
+<pre><code class="language-powershell">[root@master ~]# systemctl stop firewalld.service
+[root@master ~]# systemctl disable firewalld.service
+[root@master ~]# setenforce 0
+</code></pre>
+<h3 id="三-启动redis">三、启动Redis</h3>
+<p>因为做了systemctl模式，直接启动</p>
+<pre><code class="language-powershell">[root@master ~]# systemctl start redis.service
+</code></pre>
+<p>进入redis界面</p>
+<pre><code class="language-powershell">[root@master ~]# cd /opt/redis-5.0.5/src/
+[root@master src]# ./redis-cli -h 127.0.0.1 -p 6379 -a “123456”
+127.0.0.1:6379&gt;
+</code></pre>
+<p>测试写入、读取数据</p>
+<pre><code class="language-powershell">127.0.0.1:6379&gt; set age 22
+127.0.0.1:6379&gt; get age
+&quot;22&quot;
+</code></pre>
+<p>四、部署哨兵模式</p>
+<p>1、先把包里的配置文件拷贝过来</p>
+<pre><code>[root@master ~]# cp /opt/redis-5.0.5/sentinel.conf /usr/local/redis/etc
+</code></pre>
+<p>2、修改配置文件</p>
+<pre><code>[root@master ~]# vim /usr/local/redis/etc/sentinel.conf
+</code></pre>
+<p>3、修改以下内容</p>
+<pre><code>daemonize的值从no设置为yes
+pidfile /usr/local/redis/run/redis-sentinel.pid
+logfile &quot;/usr/local/redis/logs/redis-sentinel.log&quot;
+dir /usr/local/redis/tmp
+sentinel monitor mymaster 192.168.1.10 6379 2	#设置redis主机IP地址，端口，选举次数
+sentinel auth-pass mymaster 123456		#设置redis主机访问密码
+sentinel down-after-milliseconds mymaster 8000	#心跳检测8000毫秒,如果主机8秒内没有相应，就会在从机开始选举
+sentinel parallel-syncs mymaster 1	#执行故障转移时， 最多可以有多少个从服务器同时对新的主服务器进行同步
+</code></pre>
+<p>4、把配置文件上传给另外两台服务器（因为我配置了三台哨兵，可只配一台）</p>
+<pre><code>[root@master ~]# scp -r /usr/local/redis/etc/sentinel.conf root@192.168.1.11:/usr/local/redis/etc/sentinel.conf
+[root@master ~]# scp -r /usr/local/redis/etc/sentinel.conf root@192.168.1.12:/usr/local/redis/etc/sentinel.conf
+</code></pre>
+<p>5、创建pid、log、tmp文件（三台服务器同样操作）</p>
+<pre><code>[root@master ~]# mkdir /usr/local/redis/run
+[root@master ~]# touch /usr/local/redis/run/redis-sentinel.pid
+[root@master ~]# touch /usr/local/redis/logs/redis-sentinel.log
+[root@master ~]# mkdir /usr/local/redis/tmp
+</code></pre>
+<p>6、将哨兵服务用systemctl方式启动（三台服务器同样操作）</p>
+<pre><code>[root@master ~]# cd /lib/systemd/system
+[root@master system]# vim redis-sentinel.service
+[Unit]
+Description=Redis
+After=network.target
+
+[Service]
+ExecStart=/opt/redis-5.0.5/src/redis-sentinel /usr/local/redis/etc/sentinel.conf --sentinel
+ExecStop=/opt/redis-5.0.5/src/redis-cli -h 127.0.0.1 -p 26379 shutdown
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>创建链接并刷新配置</p>
+<pre><code>[root@master system]# ln -s /lib/systemd/system/redis-sentinel.service /etc/systemd/system/multi-user.target.wants/redis-sentinel.service
+[root@master system]# systemctl daemon-reload
+</code></pre>
+<p>7、修改master主机的配置文件</p>
+<pre><code>[root@master ~]# vim /usr/local/redis/etc/redis.conf
+masterauth 123456
+</code></pre>
+<p>8、重新启动redis服务</p>
+<pre><code>[root@master ~]#  systemctl stop redis.service
+[root@master ~]#  systemctl start redis.service
+</code></pre>
+<p>9、启动哨兵服务（三台服务器同样操作）</p>
+<pre><code>[root@master ~]#  systemctl start redis.service
+</code></pre>
+<p>10、进入redis界面查看redis信息（三台服务器同样操作）</p>
+<pre><code>[root@master ~]#  /opt/redis-5.0.5/src/redis-cli -h 127.0.0.1 -p 6379 -a 123456
+127.0.0.1&gt; info replication
+#Replication
+role:master
+connected_slaves:2
+slave0:ip=192.168.1.11,port=6379,state=online,offset=6004890,lag=0
+slave1:ip=192.168.1.12,port=6379,state=online,offset=6004890,lag=1
+</code></pre>
+<p>11、测试选举策略<br>
+将master节点192.168.1.10主节点的redis服务关掉</p>
+<pre><code>[root@master ~]#  systemctl stop redis.service
+</code></pre>
+<p>等8秒后去slave节点192.168.1.11上查看master已经飘到slave1上</p>
+<pre><code>[root@slave1~]# /opt/redis-5.0.5/src/redis-cli -h 127.0.0.1 -p 6379 -a 123456
+127.0.0.1&gt; info replication
+#Replication
+role:master
+connected_slaves:1
+slave1:ip=192.168.1.12,port=6379,state=online,offset=6004890,lag=1
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[消息中间件的使用]]></title>
+        <id>https://dhl2233.github.io/post/xiao-xi-dui-lie-de-shi-yong/</id>
+        <link href="https://dhl2233.github.io/post/xiao-xi-dui-lie-de-shi-yong/">
+        </link>
+        <updated>2023-10-06T02:05:43.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="为什么要使用消息队列的使用">为什么要使用消息队列的使用</h2>
+<h3 id="1-解耦">1. 解耦</h3>
+<p><strong>解耦合</strong>：</p>
+<ul>
+<li>消息队列允许各个服务之间进行松散耦合。生产者（发送消息的应用）和消费者（接收消息的应用）不需要直接交互，只需通过消息队列进行通信。这意味着生产者和消费者可以独立地开发、扩展和维护。</li>
+</ul>
+<h3 id="2-异步处理">2. 异步处理</h3>
+<p><strong>异步通信</strong>：</p>
+<ul>
+<li>消息队列允许生产者在发送消息后继续执行而不必等待消费者处理完消息。这提高了系统的响应速度和吞吐量。例如，用户注册后，系统可以立即返回响应，而邮件通知等操作可以异步处理。</li>
+</ul>
+<h3 id="3-负载均衡">3. 负载均衡</h3>
+<p><strong>负载均衡和伸缩性</strong>：</p>
+<ul>
+<li>消息队列可以分发消息到多个消费者，从而实现负载均衡。可以根据流量情况增加或减少消费者的数量，以应对高峰负载，确保系统在高并发场景下的稳定性和性能。</li>
+</ul>
+<h3 id="4-高可用性">4. 高可用性</h3>
+<p><strong>高可用性和容错</strong>：</p>
+<ul>
+<li>现代消息队列通常支持持久化、复制和分布式架构，确保消息不会因单点故障而丢失。即使某个消费者出现故障，消息队列也能保证消息不丢失，待消费者恢复后继续处理消息。</li>
+</ul>
+<h3 id="5-流量削峰">5. 流量削峰</h3>
+<p><strong>流量削峰填谷</strong>：</p>
+<ul>
+<li>在高峰期，消息队列可以充当缓冲器，将大量的请求消息暂时存储起来，逐步让消费者处理，从而避免后端服务被瞬时高流量冲击。</li>
+</ul>
+<h3 id="6-异构系统集成">6. 异构系统集成</h3>
+<p><strong>异构系统集成</strong>：</p>
+<ul>
+<li>消息队列可以作为不同技术栈和系统之间的桥梁，简化异构系统的集成。不同的服务只需遵循相同的消息格式和协议，即可通过消息队列进行通信。</li>
+</ul>
+<h3 id="7-保证消息顺序">7. 保证消息顺序</h3>
+<p><strong>保证消息顺序</strong>：</p>
+<ul>
+<li>在某些业务场景中，消息的处理顺序至关重要。消息队列可以保证消息按顺序被消费，确保业务逻辑的正确性。</li>
+</ul>
+<h3 id="8-可伸缩的任务队列">8. 可伸缩的任务队列</h3>
+<p><strong>任务队列</strong>：</p>
+<ul>
+<li>消息队列可以用于分发任务。例如，一个后台处理系统将任务（如图像处理、视频转码）放入消息队列，多个工作者从队列中获取任务并处理，从而实现任务的并行处理和负载均衡。</li>
+</ul>
+<h2 id="kafka">KafKa</h2>
+<p>Kafka 由 Producer、Broker、Consumer 以及负责集群管理的 ZooKeeper 组成，各部分功能如下：</p>
+<pre><code>Producer：生产者，负责消息的创建并通过一定的路由策略发送消息到合适的 Broker；
+Broker：服务实例，负责消息的持久化、中转等功能；
+Consumer ：消费者，负责从 Broker 中拉取（Pull）订阅的消息并进行消费，通常多个消费者构成一个分组，消息只能被同组中的一个消费者消费；
+ZooKeeper：负责 broker、consumer 集群元数据的管理等；（注意：Producer 端直接连接 broker，不在 zk 上存任何数据，只是通过 ZK 监听 broker 和 topic 等信息）
+</code></pre>
+<p>消息流转过程中，还有几个特别重要的概念—主题（Topic）、分区（Partition）、分段(segment)、位移（offset）。</p>
+<pre><code>topic：消息主题。Kafka 按 topic 对消息进行分类，我们在收发消息时只需指定 topic。
+partition：分区。为了提升系统的吞吐，一个 topic 下通常有多个 partition，partition 分布在不同的 Broker 上，用于存储 topic 的消息，这使 Kafka 可以在多台机器上处理、存储消息，给 kafka 提供给了并行的消息处理能力和横向扩容能力。另外，为了提升系统的可靠性，partition 通常会分组，且每组有一个主 partition、多个副本 partition，且分布在不同的 broker 上，从而起到容灾的作用。
+segment：分段。宏观上看，一个 partition 对应一个日志（Log）。由于生产者生产的消息会不断追加到 log 文件末尾，为防止 log 文件过大导致数据检索效率低下，Kafka 采取了分段和索引机制，将每个 partition 分为多个 segment，同时也便于消息的维护和清理。每个 segment 包含一个.log 日志文件、两个索引(.index、timeindex)文件以及其他可能的文件。每个 Segment 的数据文件以该段中最小的 offset 为文件名，当查找 offset 的 Message 的时候，通过二分查找快找到 Message 所处于的 Segment 中。
+offset：消息在日志中的位置，消息在被追加到分区日志文件的时候都会分配一个特定的偏移量。offset 是消息在分区中的唯一标识，是一个单调递增且不变的值。Kafka 通过它来保证消息在分区内的顺序性，不过 offset 并不跨越分区，也就是说，Kafka 保证的是分区有序而不是主题有序。
+</code></pre>
+<h2 id="rabbitmq">RabbitMQ</h2>
+<h3 id="rabbitmq六种消息模式">RabbitMQ六种消息模式</h3>
+<pre><code>    1.Simple Work Queue（简单工作队列）：常见的一对一模式，一条消息由一个消费者进行消费。如果有多个消费者，默认是使用轮询的方式将消息分配消费者
+
+    2.Work Queues（工作队列模式）：也叫公屏队列，能者多劳的消息队列模型。队列必须收到来自消费者的手动ACK（消息确认机制）才可以继续往消费者发送消息。
+
+    3.Publish/Subscribe（发布订阅模式）：一条消息被多和消费者消费。
+
+    4.Ruoting（路由模式）：有选择的接收消息。
+
+    5.Topics（主题模式）：通过一定的规则来选择性的接收消息
+
+    6.RPC模式：发布者发布消息，并且通过RPC方式等待结果。
+</code></pre>
+<h3 id="rabbitmq保证消息的可靠性">RabbitMQ保证消息的可靠性</h3>
+<pre><code>需要使用RabbitMQ发送端确认机制，确认消息成功发送到RabbitMQ并被处理
+需要使用RabbitMQ消息返回机制，若没发现目标队列，中间件会通知发送方
+需要使RabbitMQ消息端确认消息，确认消息没有发生异常
+需要使用RabbitMQ消费端限流机制，限制消息推送速度 ，保障接受端服务稳定
+大量到堆积消息会给RabbitMQ产生很大到压力，需要使用RabbitMQ消息过期时间，防止消息大量积压
+过期后会直接丢弃, 不符合业务逻辑，需要使用RabbitMQ死信队列，收集过期消息，以供分析
+</code></pre>
+<h3 id="单条同步确认机制">单条同步确认机制</h3>
+<pre><code>配置channel，开启确认模式：channel.confirmSelect()
+每发送一条消息，调用channel.waitForConfirms()方法等待确认
+
+	//建立连接
+    ConnectionFactory connectionFactory = new ConnectionFactory();
+    connectionFactory.setHost(&quot;127.0.0.1&quot;);
+    Connection connection = connectionFactory.newConnection();
+    Channel channel = connection.createChannel();
+    String message = objectMapper.writeValueAsString(orderMessageDTO);
+    channel.confirmSelect();
+    channel.basicPublish(
+            &quot;exhange.order.restaurant&quot;,
+            &quot;key.restaurant&quot;,
+            null,
+            message.getBytes());
+    if(channel.waitForConfirms()){
+        //表示发送确认处理逻辑
+    }else{
+        //发送失败
+    }
+</code></pre>
+<h3 id="消息返回机制">消息返回机制</h3>
+<pre><code>消息发送后，发送端不知道消息是否被正确路由，若路由异常，消息会被丢弃，业务异常，需要使用RabbitMQ消息返回机制，确认消息被正确路由
+</code></pre>
+<p>消息的开启方法：</p>
+<pre><code>在RabbitMQ基础配置中又有一个关键配置项：Mandatory
+
+Mandatory若为false，RabbitMQ将直接丢弃无法路由的消息
+
+Mandatory若为true，RabbitMQ才会处理无法路由的消息
+</code></pre>
+<pre><code>DeliverCallback deliverCallback = ((consumerTag, message) -&gt; {
+        //拿到消息
+        String messageBody = new String(message.getBody());
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost(&quot;127.0.0.1&quot;);
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.addReturnListener(new ReturnListener() {
+                @Override
+                public void handleReturn(int replyCode, String replyText, String exchange, String routingKey, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                    log.info(&quot;Message Return:&quot;);
+                    //处理失败的业务逻辑
+                }
+            });
+            channel.basicPublish(
+                    &quot;exhange.order.restaurant&quot;,
+                    &quot;key.restaurant&quot;,
+                    true,
+                    null,
+                    messageBody.getBytes());
+
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+    });
+
+</code></pre>
+<h2 id="二者之间区别">二者之间区别</h2>
+<h3 id="1-设计理念">1. 设计理念</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>主要设计为一个分布式日志记录系统，专注于高吞吐量和持久化存储。</li>
+<li>采用发布/订阅模式，数据以日志（log）的形式存储，消费者按需读取日志。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>设计为一个消息代理，注重灵活的消息传递和路由机制。</li>
+<li>基于 AMQP 协议，支持复杂的消息路由和消息确认机制。</li>
+</ul>
+<h3 id="2-架构">2. 架构</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>分布式架构，具有内置的分区和复制机制，保证数据的高可用性和可靠性。</li>
+<li>使用 Zookeeper 进行集群管理和协调。</li>
+<li>消息存储在磁盘上，消费者以顺序读取的方式消费消息。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>基于单节点或集群架构，节点间通过镜像队列实现高可用性。</li>
+<li>使用 Erlang OTP 实现，支持多种协议（AMQP、MQTT、STOMP 等）。</li>
+<li>消息存储在内存或磁盘上，具有灵活的消息确认和路由机制。</li>
+</ul>
+<h3 id="3-消息模型">3. 消息模型</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>使用主题（Topic）进行消息的分组，主题下有多个分区（Partition）。</li>
+<li>消费者组（Consumer Group）共同消费一个主题，消费者在组内分配到特定的分区读取消息。</li>
+<li>支持顺序消费和重放消息。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>使用交换机（Exchange）和队列（Queue）进行消息路由和存储。</li>
+<li>交换机类型（如 direct、topic、fanout、headers）决定消息的路由方式。</li>
+<li>消息投递到队列，消费者从队列中获取消息，支持消息的确认和重试机制。</li>
+</ul>
+<h3 id="4-性能">4. 性能</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>高吞吐量设计，适用于处理大量数据的流式处理和日志收集。</li>
+<li>写入和读取性能优越，特别是在数据量大和高并发的场景下表现突出。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>低延迟设计，适用于需要实时消息传递的应用。</li>
+<li>适合处理复杂的路由和消息模式，支持消息的持久化和事务处理。</li>
+</ul>
+<h3 id="5-使用场景">5. 使用场景</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>日志收集和处理、大数据分析、实时数据流处理（如 Spark、Flink）。</li>
+<li>数据管道和事件溯源，适合处理海量数据的流式传输。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>实时消息传递、任务队列、微服务通信、事件驱动架构。</li>
+<li>需要复杂消息路由和可靠性保证的场景，如订单处理、支付系统。</li>
+</ul>
+<h3 id="6-生态系统和集成">6. 生态系统和集成</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>与大数据生态系统（如 Hadoop、Spark、Flink）有良好的集成。</li>
+<li>提供 Kafka Streams 和 Kafka Connect 以实现流处理和数据集成。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>支持多种客户端库和协议，易于集成到各种编程语言和平台中。</li>
+<li>提供插件系统和管理控制台，方便监控和管理。</li>
+</ul>
+<h3 id="总结">总结</h3>
+<p><strong>Kafka</strong> 适用于需要高吞吐量和高可用性的场景，特别是在流式数据处理和日志收集中表现出色。它的分布式架构和持久化存储机制使其非常适合处理大规模数据和事件流。</p>
+<p><strong>RabbitMQ</strong> 则在需要低延迟和复杂消息路由的应用中表现更好，特别是在微服务架构和实时消息传递中有广泛应用。它的灵活性和多协议支持使其适合多样化的消息传递需求</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[JVM常用]]></title>
+        <id>https://dhl2233.github.io/post/jvm-chang-yong/</id>
+        <link href="https://dhl2233.github.io/post/jvm-chang-yong/">
+        </link>
+        <updated>2023-10-04T14:02:47.000Z</updated>
+        <content type="html"><![CDATA[<p>JVM内存模型</p>
+<p>图</p>
+<p>idea的VM options命令</p>
+<pre><code>-Xms 设置初始化内存（堆内存）分配大小，默认是电脑内存的1/64
+-Xmx 设置最大分配内存，默认是电脑内存的1/4
+-XX:+PrintGCDetails 打印GC垃圾回收信息
+-XX:+HeapDumpOnOutOfMemoryError //oom dump信息
+使用：-Xms1024m -Xmx1024m -XX:+heapDumpOnOutOfMemoryError
+-XX:MaxTenuringThreshold=5 通过这个参数可以设定进入老年代的时间，默认是15次。
+-Xms1024m，设置JVM初始堆内存为1024m。此值可以设置与-Xmx相同，以避免每次垃圾回收完成后JVM重新分配内存。
+-Xmx1024m，设置JVM最大堆内存为1024m。
+-Xss512k，设置每个线程的栈大小。JDK5.0以后每个线程栈大小为1M，之前每个线程栈大小为256K。在相同物理内存下，减小这个值能生成更多的线程，当然操作系统对一个进程内的线程数还是有限制的，不能无限生成。线程栈的大小是个双刃剑，如果设置过小，可能会出现栈溢出，特别是在该线程内有递归、大的循环时出现溢出的可能性更大，如果该值设置过大，就有影响到创建栈的数量，如果是多线程的应用，就会出现内存溢出的错误。
+-Xmn341m，设置年轻代大小为341m。在整个堆内存大小确定的情况下，增大年轻代将会减小年老代，反之亦然。此值关系到JVM垃圾回收，对系统性能影响较大，官方推荐配置为整个堆大小的3/8。
+-XX:NewSize=341m，设置年轻代初始值为341M。
+-XX:MaxNewSize=341m，设置年轻代最大值为341M。
+-XX:PermSize=512m，设置持久代初始值为512M，但在java8及之后就不支持了，改用-XX:MetaspaceSize=512m。
+-XX:MaxPermSize=512m，设置持久代最大值为512M，同样在java8及之后就不支持了，改用-XX:MaxMetaspaceSize=512m。
+-XX:NewRatio=2，设置年轻代（包括1个Eden和2个Survivor区）与年老代的比值。表示年轻代比年老代为1:2。
+-XX:SurvivorRatio=8，设置年轻代中Eden区与Survivor区的比值。表示2个Survivor区（JVM堆内存年轻代中默认有2个大小相等的Survivor区）与1个Eden区的比值为1:1:8，即1个Survivor区占整个年轻代大小的1/10。
+-XX:MaxTenuringThreshold=15，具体参看JVM系列之内存分配和回收策略中对象的衰老过程。
+-XX:ReservedCodeCacheSize=256m，设置代码缓存的大小，用来存储已编译方法生成的本地代码。
+-client，设置JVM使用Client模式，特点是启动速度比较快，但运行时性能和内存管理效率不高，通常用于客户端应用程序或开发调试；在32位环境下直接运行Java程序默认启用该模式。
+-server，设置JVM使Server模式，特点是启动速度比较慢，但运行时性能和内存管理效率很高，适用于生产环境。在具有64位能力的JDK环境下默认启用该模式。
+-Dserver.port=8084，设置服务端口为8084
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[git常用命令]]></title>
+        <id>https://dhl2233.github.io/post/git-chang-yong-ming-ling/</id>
+        <link href="https://dhl2233.github.io/post/git-chang-yong-ming-ling/">
+        </link>
+        <updated>2023-10-04T02:04:56.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="git新建分支提交代码到分支">Git新建分支提交代码到分支</h3>
+<p><code>git clone xxx (xxx为刚刚复制的仓库链接）//代码下载到本地 git branch xxx (xxx填写你的分支名称)//新建分支 git branch -a//查看所有分支 git checkout xxx (xxx填写要切换的分支名称）//切换到某一分支 git add .//添加修改代码到缓存（注意最后的&quot;.&quot;前面有个空格 git commit -m &quot;xxx&quot; （xxx为本次提交代码的备注）//添加提交代码的备注 git push origin xxx （xxx为要提交代码的分支名称）//提交代码到指定分支</code></p>
+<h4 id="第一次提交代码">第一次提交代码</h4>
+<pre><code class="language-javascript">1、git init
+
+2、 git status
+
+3、git add .
+
+4、git commit -m 'init'
+
+5、创建远程仓库
+
+6、git  remote add origin  url//这边的URL跟的是你项目的地址
+
+7、git push -u origin  master
+
+1234567891011121314
+</code></pre>
+<h4 id="新建分支">新建分支</h4>
+<pre><code class="language-javascript">git branch
+
+git checkout -b 分支名   //创建分支并切换到该分支
+123
+</code></pre>
+<h4 id="合并分支">合并分支</h4>
+<pre><code class="language-javascript">git add .
+
+git commit -m '提交信息'
+
+git branch -a 查看远程分支
+
+git checkout master//切换到主分支
+
+git merger 分支名 //合并  如果报错再执行 ：git merge dev-login --allow-unrelated-histories
+
+git push
+</code></pre>
+<h4 id="git-clone">git clone</h4>
+<p>从远程仓库克隆一个版本库到本地。</p>
+<pre><code class="language-javascript"># 默认在当前目录下创建和版本库名相同的文件夹并下载版本到该文件夹下
+$ git clone &lt;远程仓库的网址&gt;
+
+# 指定本地仓库的目录
+$ git clone &lt;远程仓库的网址&gt; &lt;本地目录&gt;
+
+# -b 指定要克隆的分支，默认是master分支
+$ git clone &lt;远程仓库的网址&gt; -b &lt;分支名称&gt; &lt;本地目录&gt;
+</code></pre>
+<h4 id="git-init">git init</h4>
+<p>初始化项目所在目录，初始化后会在当前目录下出现一个名为 .git 的目录。</p>
+<pre><code class="language-javascript"># 初始化本地仓库，在当前目录下生成 .git 文件夹
+$ git init
+
+123
+</code></pre>
+<h4 id="git-status">git status</h4>
+<p>查看本地仓库的状态。</p>
+<pre><code class="language-javascript"># 查看本地仓库的状态
+$ git status
+
+# 以简短模式查看本地仓库的状态
+# 会显示两列，第一列是文件的状态，第二列是对应的文件
+# 文件状态：A 新增，M 修改，D 删除，?? 未添加到Git中
+$ git status -s
+</code></pre>
+<h4 id="git-remote">git remote</h4>
+<p>操作远程库。</p>
+<pre><code class="language-javascript"># 列出已经存在的远程仓库
+$ git remote
+
+# 列出远程仓库的详细信息，在别名后面列出URL地址
+$ git remote -v
+$ git remote --verbose
+
+# 添加远程仓库
+$ git remote add &lt;远程仓库的别名&gt; &lt;远程仓库的URL地址&gt;
+
+# 修改远程仓库的别名
+$ git remote rename &lt;原远程仓库的别名&gt; &lt;新的别名&gt;
+
+# 删除指定名称的远程仓库
+$ git remote remove &lt;远程仓库的别名&gt;
+
+# 修改远程仓库的 URL 地址
+$ git remote set-url &lt;远程仓库的别名&gt; &lt;新的远程仓库URL地址&gt;
+
+12345678910111213141516171819
+</code></pre>
+<h4 id="git-branch">git branch</h4>
+<p>操作 Git 的分支命令。</p>
+<pre><code class="language-javascript"># 列出本地的所有分支，当前所在分支以 &quot;*&quot; 标出
+$ git branch
+
+# 列出本地的所有分支并显示最后一次提交，当前所在分支以 &quot;*&quot; 标出
+$ git branch -v
+
+# 创建新分支，新的分支基于上一次提交建立
+$ git branch &lt;分支名&gt;
+
+# 修改分支名称
+# 如果不指定原分支名称则为当前所在分支
+$ git branch -m [&lt;原分支名称&gt;] &lt;新的分支名称&gt;
+# 强制修改分支名称
+$ git branch -M [&lt;原分支名称&gt;] &lt;新的分支名称&gt;
+
+# 删除指定的本地分支
+$ git branch -d &lt;分支名称&gt;
+
+# 强制删除指定的本地分支
+$ git branch -D &lt;分支名称&gt;
+</code></pre>
+<h4 id="git-checkout">git checkout</h4>
+<p>检出命令，用于创建、切换分支等。</p>
+<pre><code class="language-javascript"># 切换到已存在的指定分支
+$ git checkout &lt;分支名称&gt;
+
+# 创建并切换到指定的分支，保留所有的提交记录
+# 等同于 &quot;git branch&quot; 和 &quot;git checkout&quot; 两个命令合并
+$ git checkout -b &lt;分支名称&gt;
+
+# 创建并切换到指定的分支，删除所有的提交记录
+$ git checkout --orphan &lt;分支名称&gt;
+
+# 替换掉本地的改动，新增的文件和已经添加到暂存区的内容不受影响
+$ git checkout &lt;文件路径&gt;
+</code></pre>
+<h4 id="git-cherry-pick">git cherry-pick</h4>
+<p>把已经提交的记录合并到当前分支。</p>
+<pre><code class="language-javascript"># 把已经提交的记录合并到当前分支
+$ git cherry-pick &lt;commit ID&gt;
+
+123
+</code></pre>
+<h4 id="git-add">git add</h4>
+<p>把要提交的文件的信息添加到暂存区中。当使用 git <a href="https://so.csdn.net/so/search?q=commit&amp;spm=1001.2101.3001.7020">commit</a> 时，将依据暂存区中的内容来进行文件的提交。</p>
+<pre><code class="language-javascript"># 把指定的文件添加到暂存区中
+$ git add &lt;文件路径&gt;
+
+# 添加所有修改、已删除的文件到暂存区中
+$ git add -u [&lt;文件路径&gt;]
+$ git add --update [&lt;文件路径&gt;]
+
+# 添加所有修改、已删除、新增的文件到暂存区中，省略 &lt;文件路径&gt; 即为当前目录
+$ git add -A [&lt;文件路径&gt;]
+$ git add --all [&lt;文件路径&gt;]
+
+# 查看所有修改、已删除但没有提交的文件，进入一个子命令系统
+$ git add -i [&lt;文件路径&gt;]
+$ git add --interactive [&lt;文件路径&gt;]
+</code></pre>
+<h4 id="git-commit">git commit</h4>
+<p>将暂存区中的文件提交到本地仓库中。</p>
+<pre><code class="language-javascript"># 把暂存区中的文件提交到本地仓库，调用文本编辑器输入该次提交的描述信息
+$ git commit
+
+# 把暂存区中的文件提交到本地仓库中并添加描述信息
+$ git commit -m &quot;&lt;提交的描述信息&gt;&quot;
+
+# 把所有修改、已删除的文件提交到本地仓库中
+# 不包括未被版本库跟踪的文件，等同于先调用了 &quot;git add -u&quot;
+$ git commit -a -m &quot;&lt;提交的描述信息&gt;&quot;
+
+# 修改上次提交的描述信息
+$ git commit --amend
+
+12345678910111213
+</code></pre>
+<h4 id="git-fetch">git fetch</h4>
+<p>从远程仓库获取最新的版本到本地的 tmp 分支上。</p>
+<pre><code class="language-javascript"># 将远程仓库所有分支的最新版本全部取回到本地
+$ git fetch &lt;远程仓库的别名&gt;
+
+# 将远程仓库指定分支的最新版本取回到本地
+$ git fetch &lt;远程主机名&gt; &lt;分支名&gt;
+</code></pre>
+<h4 id="git-merge">git merge</h4>
+<p>合并分支。</p>
+<pre><code class="language-javascript"># 把指定的分支合并到当前所在的分支下
+$ git merge &lt;分支名称&gt;
+
+123
+</code></pre>
+<h4 id="git-diff">git diff</h4>
+<p>比较版本之间的差异。</p>
+<pre><code class="language-javascript"># 比较当前文件和暂存区中文件的差异，显示没有暂存起来的更改
+$ git diff
+
+# 比较暂存区中的文件和上次提交时的差异
+$ git diff --cached
+$ git diff --staged
+
+# 比较当前文件和上次提交时的差异
+$ git diff HEAD
+
+# 查看从指定的版本之后改动的内容
+$ git diff &lt;commit ID&gt;
+
+# 比较两个分支之间的差异
+$ git diff &lt;分支名称&gt; &lt;分支名称&gt;
+
+# 查看两个分支分开后各自的改动内容
+$ git diff &lt;分支名称&gt;...&lt;分支名称&gt;
+</code></pre>
+<h4 id="git-pull">git pull</h4>
+<p>从远程仓库获取最新版本并合并到本地。<br>
+首先会执行 git fetch，然后执行 git merge，把获取的分支的 HEAD 合并到当前分支。</p>
+<pre><code class="language-javascript"># 从远程仓库获取最新版本。
+$ git pull
+
+123
+</code></pre>
+<h4 id="git-push">git push</h4>
+<p>把本地仓库的提交推送到远程仓库。</p>
+<pre><code class="language-javascript"># 把本地仓库的分支推送到远程仓库的指定分支
+$ git push &lt;远程仓库的别名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+
+# 删除指定的远程仓库的分支
+$ git push &lt;远程仓库的别名&gt; :&lt;远程分支名&gt;
+$ git push &lt;远程仓库的别名&gt; --delete &lt;远程分支名&gt;
+
+1234567
+</code></pre>
+<h4 id="git-log">git log</h4>
+<p>显示提交的记录。</p>
+<pre><code class="language-javascript"># 打印所有的提交记录
+$ git log
+
+# 打印从第一次提交到指定的提交的记录
+$ git log &lt;commit ID&gt;
+
+# 打印指定数量的最新提交的记录
+$ git log -&lt;指定的数量&gt;
+</code></pre>
+<h4 id="git-reset">git reset</h4>
+<p>还原提交记录。</p>
+<pre><code class="language-javascript"># 重置暂存区，但文件不受影响
+# 相当于将用 &quot;git add&quot; 命令更新到暂存区的内容撤出暂存区，可以指定文件
+# 没有指定 commit ID 则默认为当前 HEAD
+$ git reset [&lt;文件路径&gt;]
+$ git reset --mixed [&lt;文件路径&gt;]
+
+# 将 HEAD 的指向改变，撤销到指定的提交记录，文件未修改
+$ git reset &lt;commit ID&gt;
+$ git reset --mixed &lt;commit ID&gt;
+
+# 将 HEAD 的指向改变，撤销到指定的提交记录，文件未修改
+# 相当于调用 &quot;git reset --mixed&quot; 命令后又做了一次 &quot;git add&quot;
+$ git reset --soft &lt;commit ID&gt;
+
+# 将 HEAD 的指向改变，撤销到指定的提交记录，文件也修改了
+$ git reset --hard &lt;commit ID&gt;
+
+1234567891011121314151617
+</code></pre>
+<h4 id="git-revert">git revert</h4>
+<p>生成一个新的提交来撤销某次提交，此次提交之前的所有提交都会被保留。</p>
+<pre><code class="language-javascript"># 生成一个新的提交来撤销某次提交
+$ git revert &lt;commit ID&gt;
+
+123
+</code></pre>
+<h4 id="git-tag">git tag</h4>
+<p>操作标签的命令</p>
+<pre><code class="language-javascript"># 打印所有的标签
+$ git tag
+
+# 添加轻量标签，指向提交对象的引用，可以指定之前的提交记录
+$ git tag &lt;标签名称&gt; [&lt;commit ID&gt;]
+
+# 添加带有描述信息的附注标签，可以指定之前的提交记录
+$ git tag -a &lt;标签名称&gt; -m &lt;标签描述信息&gt; [&lt;commit ID&gt;]
+
+# 切换到指定的标签
+$ git checkout &lt;标签名称&gt;
+
+# 查看标签的信息
+$ git show &lt;标签名称&gt;
+
+# 删除指定的标签
+$ git tag -d &lt;标签名称&gt;
+
+# 将指定的标签提交到远程仓库
+$ git push &lt;远程仓库的别名&gt; &lt;标签名称&gt;
+
+# 将本地所有的标签全部提交到远程仓库
+$ git push &lt;远程仓库的别名&gt; –tags
+
+123456789101112131415161718192021222324
+</code></pre>
+<h4 id="git-mv">git mv</h4>
+<p>重命名文件或者文件夹</p>
+<pre><code class="language-javascript"># 重命名指定的文件或者文件夹
+$ git mv &lt;源文件/文件夹&gt; &lt;目标文件/文件夹&gt;
+
+123
+</code></pre>
+<h4 id="git-rm">git rm</h4>
+<p>删除文件或者文件夹。</p>
+<pre><code class="language-javascript"># 移除跟踪指定的文件，并从本地仓库的文件夹中删除
+$ git rm &lt;文件路径&gt;
+
+# 移除跟踪指定的文件夹，并从本地仓库的文件夹中删除
+$ git rm -r &lt;文件夹路径&gt;
+
+# 移除跟踪指定的文件，在本地仓库的文件夹中保留该文件
+$ git rm --cached
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[数据库设计]]></title>
+        <id>https://dhl2233.github.io/post/shu-ju-ku-she-ji-bi-ji/</id>
+        <link href="https://dhl2233.github.io/post/shu-ju-ku-she-ji-bi-ji/">
+        </link>
+        <updated>2023-10-03T10:40:32.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="基础概念">基础概念</h1>
+<h2 id="sql-db-dbms分别是什么他们之间的关系">sql、DB、DBMS分别是什么，他们之间的关系？</h2>
+<h3 id="db">DB:</h3>
+<p>DataBase（数据库，数据库实际上在硬盘上以文件的形式存在）</p>
+<h3 id="dbms">DBMS:</h3>
+<p>DataBase Management System（数据库管理系统，常见的有：MySQL Oracle DB2 Sybase SqlServer…）</p>
+<h3 id="sql">SQL:</h3>
+<p>结构化查询语言，是一门标准通用的语言。标准的sql适合于所有的数据库产品。<br>
+SQL属于高级语言。只要能看懂英语单词的，写出来的sql语句，可以读懂什么意思。<br>
+SQL语句在执行的时候，实际上内部也会先进行编译，然后再执行sql。（sql语句的编译由DBMS完成。）</p>
+<h3 id="数据库三范式">数据库三范式</h3>
+<p>数据库三大范式分别是：</p>
+<ol>
+<li>第一范式（1NF）：要求数据库表的每一列都是不可分割的原子数据项，即列中不可再分，强调列的原子性。</li>
+<li>第二范式（2NF）：在满足1NF的基础上，要求每个表必须有一个数据项作为主键，其他数据项与主键一一对应，即要求数据库表中的每个非主键列必须完全依赖于主键，不能只依赖于主键的一部分（主要针对复合主键而言）。</li>
+<li>第三范式（3NF）：在满足2NF的基础上，要求任何非主属性不依赖于其他非主属性，即非主键列之间没有传递依赖关系。****</li>
+</ol>
+<h3 id="事务的四大特性">事务的四大特性</h3>
+<ul>
+<li>原子性： 事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行。</li>
+<li>一致性： 指在事务开始之前和事务结束以后，数据不会被破坏，假如A账户给B账户转10块钱，不管成功与否，A和B的总金额是不变的。</li>
+<li>隔离性： 多个事务并发访问时，事务之间是相互隔离的，即一个事务不影响其它事务运行效果。简言之，就是事务之间是进水不犯河水的。</li>
+<li>持久性： 表示事务完成以后，该事务对数据库所作的操作更改，将持久地保存在数据库之中。</li>
+</ul>
+<p>事务ACID特性的实现思想</p>
+<ul>
+<li>原子性：是使用 undo log来实现的，如果事务执行过程中出错或者用户执行了rollback，系统通过undo log日志返回事务开始的状态。</li>
+<li>持久性：使用 redo log来实现，只要redo log日志持久化了，当系统崩溃，即可通过redo log把数据恢复。</li>
+<li>隔离性：通过锁以及MVCC,使事务相互隔离开。</li>
+<li>一致性：通过回滚、恢复，以及并发情况下的隔离性，从而实现一致性。</li>
+</ul>
+<h2 id="学习mysql主要还是学习通用的sql语句那么sql语句包括增删改查sql语句怎么分类呢">学习MySQL主要还是学习通用的SQL语句，那么SQL语句包括增删改查，SQL语句怎么分类呢？</h2>
+<p>DQL（数据查询语言）: 查询语句，凡是select语句都是DQL。<br>
+DML（数据操作语言）：insert delete update，对表当中的数据进行增删改。<br>
+DDL（数据定义语言）：create drop alter，对表结构的增删改。<br>
+TCL（事务控制语言）：commit提交事务，rollback回滚事务。(TCL中的T是Transaction)<br>
+DCL（数据控制语言）: grant授权、revoke撤销权限等。</p>
+<h2 id="mysql数据库使用">MYSQL数据库使用</h2>
+<h3 id="数据库存储引擎">数据库存储引擎</h3>
+<h4 id="innodb">InnoDB</h4>
+<pre><code>使用场景：一般事务性，均使用该引擎，用途最广，如果把握不准，就使用该引擎
+特点：
+	修改快，支持事务 ———— 行锁
+	存储限制：64TG
+	事务支持：支持事务
+</code></pre>
+<h4 id="myisam">MyISAM</h4>
+<pre><code>使用场景：大量查询、很少修改的场景
+特点：
+	强调了快速读取操作————表锁
+	存储限制：256TG
+	事务支持：不支持事务
+</code></pre>
+<h4 id="memory">MEMORY</h4>
+<pre><code>可以把一些常见的数据，要保证性能，就保存在memory存储引擎
+使用场景：由于易失性，可以用于存储在分析中产生的中间表
+特点：
+    所有的数据都保存在内存中、一旦服务器重启，所有memory存储引擎的表数据会消失但是表结构会保存下来
+    存储限制：取决于RAM（随机存储器）
+    事务支持：不支持事务
+</code></pre>
+<h4 id="archive">Archive</h4>
+<pre><code>使用场景：在日志和数据采集的时候可以使用
+特点：
+    只允许插入和查询，不允许修改和删除，压缩存储，节约空间，可以实现高并发的插入，支持在自增ID上建立索引
+    archive表比MyISAM表要小大约75%，比支持事务处理的InnoDB表小大约83%
+    不支持索引（自增ID列除外）
+</code></pre>
+<h4 id="什么是幻读脏读不可重复读呢">什么是幻读，脏读，不可重复读呢？</h4>
+<ul>
+<li><strong>脏读 (Dirty Read)</strong>:事务A、B交替执行，事务A被事务B干扰到了，因为事务A读取到事务B未提交的数据,这就是</li>
+<li><strong>不可重复读 (Non-repeatable Read)</strong>:在一个事务范围内，两个相同的查询，读取同一条记录，却返回了不同的数据。</li>
+<li><strong>幻读 (Phantom Read)</strong>: 事务A查询一个范围的结果集，另一个并发事务B往这个范围中插入/删除了数据，并静悄悄地提交，然后事务A再次查询相同的范围，两次读取得到的结果集不一样了。</li>
+</ul>
+<h4 id="事务的隔离级别">事务的隔离级别</h4>
+<ul>
+<li>读未提交（Read Uncommitted）
+<ul>
+<li><strong>特点</strong>: 事务可以读取其他未提交事务的修改。</li>
+</ul>
+</li>
+<li>读已提交（Read Committed）
+<ul>
+<li><strong>特点</strong>: 事务只能读取其他已提交事务的修改。</li>
+<li><strong>解决问题</strong>: 避免了脏读。</li>
+</ul>
+</li>
+<li>可重复读（Repeatable Read）
+<ul>
+<li><strong>特点</strong>: 在同一个事务中，多次读取同一行数据会得到相同的结果，即使其他事务修改了数据。</li>
+<li><strong>解决问题</strong>: 避免了脏读和不可重复读。</li>
+</ul>
+</li>
+<li>串行化（Serializable）
+<ul>
+<li><strong>特点</strong>: 强制事务按顺序执行，仿佛事务是一个接一个顺序执行的。</li>
+<li><strong>并发问题</strong>: 解决了脏读、不可重复读和幻读问题。</li>
+<li><strong>性能影响</strong>: 由于加锁机制，这种隔离级别性能最差，但数据一致性最高。</li>
+</ul>
+</li>
+</ul>
+<p>Mysql默认的事务隔离级别是可重复读(Repeatable Read)</p>
+<h3 id="账号管理">账号管理</h3>
+<pre><code>查询用户：SELECT * from user;
+
+查看用户常用信息：select host,user from user;
+
+删除用户（慎用）：#命令：drop user 用户名；
+
+                                #drop user ls;
+权限操作：
+	设置权限（Grant）
+      #语法：grant privileges on databasename.tablename to username@'host';
+
+      #给zs用户 赋予 数据库db_xiaoli.t_p1_user 查询权限
+
+      grant SELECT on db_xiaoli.t_p1_user to zs@'%';
+
+      #给zs用户 赋予 数据库db_xiaoli中的表t_p1_user 修改权限
+
+      grant UPDATE on db_xiaoli.t_p1_user to zs@'%';
+
+      #给zs用户 赋予 数据库db_xiaoli中所有表 查询权限
+
+      grant SELECT on db_xiaoli.* to zs@'%';
+
+      #给zs用户 赋予 数据库db_xiaoli中所有表 所有权限
+
+      grant ALL on db_xiaoli.* to zs@'%';
+      
+	撤销权限（Revoke）
+      #语法：revoke privileges on databasename.tablename from username@'host';
+
+      #啥也不能回收,不会对GRANT ALL PRIVILEGES ON `db_xiaoli`.* TO `zs`@`%`有任何影响
+
+      revoke DELETE on db_xiaoli.t_p1_user from zs@'%';
+
+      #可以回收GRANT SELECT，UPDATE ON `db_xiaoli`.* TO `zs`@`%`这条赋权语句带来的权限
+
+      revoke all on db_xiaoli.* from zs@'%';
+
+      #注：revoke只能回收grants列表中更小的权限；
+      
+	查看用户权限
+		#命令：show grants for 用户名；
+		
+		show frants for 'zs'@'%';
+</code></pre>
+<h3 id="值类型分类">值类型分类</h3>
+<pre><code>整数：
+
+    tinyint 8位（-128 ~ 127）
+    smallint 16位（-32768 ~ 32767）
+    mediumint 24位（-8388608 ~ 8388607）
+    int 32位 大约正负21亿
+    bigint 64位
+
+实数（带有小数点）：
+
+    float 4个字节
+    double 8个字节
+    decimal 最多允许65个数字：涉及到数字的运算使用decimal
+
+字符串：
+
+    char：定长，MySQL根据定义字符串的长度一次分配足够的空间
+               适用场景：较短的字符串，且所有值接近同一长度
+    varchar：比定长类型节约空间
+                    适用场景：字符串的最长长度比评估长度大很多，列的更新较少
+                    缺点：频繁修改，且字符串的长度变化大时，可能出现页分裂
+	datetime：精度：秒
+                 与时区无关，8个字节存储空间
+                 范围：1001至9999年
+	timestamp：保存1970年1月1日午夜以来的秒数
+                    占用4个字节存储空间
+                    范围：1970年至2038年
+                    与时区有关
+                    默认为NOT NULL
+                    通常尽量使用timestamp
+                    精度：秒
+	date：yyyy-MM-dd
+	time：HH:mm:ss
+</code></pre>
+<h2 id="mysql基础增删改查">Mysql基础增删改查</h2>
+<h3 id="数据操作">数据操作</h3>
+<h4 id="insert-into">INSERT INTO</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 向表中插入新记录</p>
+<pre><code>INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...);
+</code></pre>
+</li>
+</ul>
+<h4 id="update">UPDATE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 更新表中的现有记录</p>
+<pre><code>UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+</code></pre>
+</li>
+</ul>
+<h4 id="delete">DELETE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 删除表中的现有记录</p>
+<pre><code>DELETE FROM table_name
+WHERE condition;
+</code></pre>
+</li>
+</ul>
+<h3 id="查询数据">查询数据</h3>
+<h3 id="基本查询">基本查询</h3>
+<h4 id="select">SELECT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 从数据库中选择数据</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name;
+</code></pre>
+</li>
+</ul>
+<h3 id="条件查询">条件查询</h3>
+<h4 id="where">WHERE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于过滤记录</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+</code></pre>
+</li>
+</ul>
+<h4 id="and-or-not">AND, OR, NOT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于组合和反转条件</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2;
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2;
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+</code></pre>
+</li>
+</ul>
+<h3 id="模糊查询">模糊查询</h3>
+<h4 id="like">LIKE</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于搜索匹配的字符串</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column LIKE pattern;
+</code></pre>
+</li>
+</ul>
+<h4 id="通配符">通配符</h4>
+<ul>
+<li>
+<p><code>%</code>: 代表零个、一个或多个字符。</p>
+</li>
+<li>
+<p><code>_</code>: 代表一个单一字符</p>
+<pre><code>SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';  -- 以&quot;a&quot;开头的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';  -- 以&quot;a&quot;结尾的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';  -- 包含&quot;or&quot;的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE '_r%';  -- 第二个字符是&quot;r&quot;的所有记录
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a_%_%';  -- 以&quot;a&quot;开头且总长度至少为3的所有记录
+</code></pre>
+</li>
+</ul>
+<h3 id="范围查询">范围查询</h3>
+<h4 id="between">BETWEEN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 选取介于两个值之间的范围内的值</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column BETWEEN value1 AND value2;
+</code></pre>
+</li>
+</ul>
+<h4 id="in">IN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 选取匹配列表中的值</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column IN (value1, value2, ...);
+</code></pre>
+</li>
+</ul>
+<h3 id="聚合查询">聚合查询</h3>
+<h4 id="count-sum-avg-max-min">COUNT, SUM, AVG, MAX, MIN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 聚合函数，用于计算</p>
+<pre><code>SELECT COUNT(column) FROM table_name;  -- 计算行数
+SELECT SUM(column) FROM table_name;    -- 计算总和
+SELECT AVG(column) FROM table_name;    -- 计算平均值
+SELECT MAX(column) FROM table_name;    -- 计算最大值
+SELECT MIN(column) FROM table_name;    -- 计算最小值
+</code></pre>
+</li>
+</ul>
+<h3 id="分组查询">分组查询</h3>
+<h4 id="group-by">GROUP BY</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 按某列对结果集进行分组</p>
+<pre><code>SELECT column1, COUNT(column2)
+FROM table_name
+GROUP BY column1;
+</code></pre>
+</li>
+</ul>
+<h4 id="having">HAVING</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 用于对分组结果进行过滤</p>
+<pre><code>SELECT column1, COUNT(column2)
+FROM table_name
+GROUP BY column1
+HAVING COUNT(column2) &gt; value;
+</code></pre>
+</li>
+</ul>
+<h3 id="排序查询">排序查询</h3>
+<h4 id="order-by">ORDER BY</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 对结果集进行排序</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1 ASC;  -- 升序
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1 DESC;  -- 降序
+</code></pre>
+</li>
+</ul>
+<h3 id="联合查询">联合查询</h3>
+<h4 id="join">JOIN</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 从多个表中选择数据</p>
+<ul>
+<li>
+<p>INNER JOIN: 只返回两个表中有匹配的行。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+INNER JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+<li>
+<p>LEFT JOIN: 返回包括左表中的所有记录和右表中匹配的记录。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+<li>
+<p>RIGHT JOIN: 返回包括右表中的所有记录和左表中匹配的记录。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+RIGHT JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+<li>
+<p>FULL OUTER JOIN: 返回两个表中的所有记录，当没有匹配时显示 NULL。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+FULL OUTER JOIN table2
+ON table1.common_column = table2.common_column;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="子查询">子查询</h3>
+<h4 id="子查询-2">子查询</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 在另一个查询中的查询</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE column = (SELECT column FROM table_name WHERE condition);
+</code></pre>
+</li>
+</ul>
+<h3 id="高级查询">高级查询</h3>
+<h4 id="union">UNION</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 合并两个或多个 SELECT 语句的结果集</p>
+<pre><code>SELECT column1, column2, ...
+FROM table1
+UNION
+SELECT column1, column2, ...
+FROM table2;
+</code></pre>
+</li>
+</ul>
+<h4 id="exists">EXISTS</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 检查是否存在记录</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+WHERE EXISTS (SELECT column FROM table_name WHERE condition);
+</code></pre>
+</li>
+</ul>
+<h3 id="特殊关键字">特殊关键字</h3>
+<h4 id="distinct">DISTINCT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 返回唯一不同的值</p>
+<pre><code>SELECT DISTINCT column1, column2, ...
+FROM table_name;
+</code></pre>
+</li>
+</ul>
+<h4 id="limit">LIMIT</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 指定返回的记录数。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+LIMIT number;
+</code></pre>
+</li>
+</ul>
+<h4 id="offset">OFFSET</h4>
+<ul>
+<li>
+<p><strong>用法</strong>: 指定开始返回记录的位置。</p>
+<pre><code>SELECT column1, column2, ...
+FROM table_name
+LIMIT number OFFSET offset_value;
+</code></pre>
+</li>
+</ul>
+<h3 id="索引">索引</h3>
+<p>​	索引的作用相当于图书的目录，可以根据目录中的页码快速找到所需的内容。数据库使用索引以找到特定值，然后顺指针找到包含该值的行。在表中建立索引，然后在索引中找到符合查询条件的索引值，最后通过保存在索引中的 ROWID（相当于页码）快速找到表中对应的记录。索引的建立是表中比较有指向性的字段，相当于目录，比如说行政区域代码，同一个地域的行政区域代码都是相同的，那么给这一列加上索引，避免让它重复扫描，从而达到优化的目的。</p>
+<h4 id="b树索引">B+树索引</h4>
+<p>高度的平衡性：B+树是平衡树的一种，它会保持高度的平衡，从而保证查找、插入和删除操作的平均时间复杂度都是对数级别的，这样可以保证索引的查询性能稳定。</p>
+<p>节点可以存储更多的子节点：在B-tree中，每个节点可以包含多个元素和多个指向子节点的指针。在B+树中，非叶子节点仅用于索引，只含有键值和指向子节点的指针，不包含实际的数据记录；叶子节点包含所有的键值和指向数据记录的指针，这样可以减少查询时访问磁盘的次数。</p>
+<p>查询速度：由于B+树的非叶子节点不包含实际数据，所以在同样大小的内存页中，可以存储更多的键值和指针，这意味着在相同的IO次数下，可以查询到更多的数据，从而提高查询速度。</p>
+<p>范围查询：B+树的叶子节点是链接的，因此可以很容易地进行范围查询，只需要从叶子节点开始，沿链接遍历直到结束，不需要回到根节点。</p>
+<p>效率：相比于二叉树和其他数据结构，B+树的效率更高，因为它的IO操作更少，且查询时间复杂度更稳定。</p>
+<h4 id="索引失效">索引失效</h4>
+<ol>
+<li>查询条件使用了函数，导致不能直接利用索引。</li>
+<li>使用了不等于(!= 或者 &lt;&gt;)，导致无法完全利用索引。</li>
+<li>索引列参与了计算，使得优化器放弃使用索引。</li>
+<li>使用了LIKE关键字，且模式的开始是通配符(%xx)，导致无法使用索引。</li>
+<li>使用了OR条件，但是其中有些条件不是索引字段，导致整个OR条件使用不了索引。</li>
+<li>复合索引，但是没有遵守最左前缀规则，导致索引失效。</li>
+<li>查询的数据量过大，导致优化器决定全表扫描而不是使用索引。</li>
+<li>索引选择不当，比如在频繁更新的列上建立索引，可能导致性能问题。</li>
+</ol>
+<p>解决方法：</p>
+<ol>
+<li>尽量避免在查询条件中使用函数。</li>
+<li>尽可能让等值替换成等值比较。</li>
+<li>尽量避免在索引列上进行计算。</li>
+<li>尽量避免模式是通配符开始的LIKE查询。</li>
+<li>如果使用了OR，可以考虑将OR语句拆分成多个查询，并且每个查询都能利用索引。</li>
+<li>确保复合索引的字段顺序符合查询中的顺序。</li>
+<li>优化SQL查询，减少返回的数据量，比如使用LIMIT。</li>
+<li>根据实际情况，重新评估索引的有效性，可能需要创建或修改索引。</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[常用算法设计思想]]></title>
+        <id>https://dhl2233.github.io/post/suan-fa-she-ji-bi-ji/</id>
+        <link href="https://dhl2233.github.io/post/suan-fa-she-ji-bi-ji/">
+        </link>
+        <updated>2023-10-02T05:01:16.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="八大算法枚举-递推-递归-分治-贪心-试探法-动态迭代和模拟算法思想"><strong>八大算法：枚举、递推、递归、分治、贪心、试探法、动态迭代和模拟算法思想。</strong></h4>
+<h4 id="一-枚举算法思想暴力算法">一、枚举算法思想（暴力算法）</h4>
+<p>将问题的所有可能答案一一列举，根据判断条件判断此答案是否合适，一般用循环实现。</p>
+<p>**经典运用：**百钱买百鸡、填写运算符</p>
+<h4 id="二-递推算法思想">二、递推算法思想</h4>
+<p>1.顺推法：从已知条件出发，逐步推算出要解决问题的方法。</p>
+<p>2.逆推法：从已知结果出发，用迭代表达式逐步推算出问题开始的条件，即顺推法的逆过程。</p>
+<p>**经典运用：**斐波那契数列（顺推法）、银行存款（逆推法）</p>
+<h4 id="三-递归算法思想">三、递归算法思想</h4>
+<p>1.递归过程一般通过函数或子过程实现；</p>
+<p>2.递归算法在函数或子过程的内部，直接或间接调用自己的算法</p>
+<p>3.递归算法实际上是把问题转化为规模缩小了的同类问题的子问题，然后再递归调用函数或过程来表示问题的解</p>
+<p>注意：必须有一个明确的递归结束条件；如果递归次数过多，容易造成栈溢出。</p>
+<p>**经典运用：**汉诺塔问题、阶乘问题</p>
+<h4 id="四-分治算法思想"><strong>四、分治算法思想</strong></h4>
+<p>将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。只要求出子问题的解，就可得到原问题的解。</p>
+<p>一般步骤：</p>
+<p>1.分解，将要解决的问题划分成若干个规模较小的同类问题</p>
+<p>2.求解，当子问题划分得足够小时，用较简单的方法解决</p>
+<p>3.合并，按原问题的要求，将子问题的解逐层合并构成原问题的解</p>
+<p>**经典运用：**大数相乘问题、比赛日程安排</p>
+<h4 id="五-贪心算法思想"><strong>五、贪心算法思想</strong></h4>
+<p>从问题的某一个初始解出发，逐步逼近给定的目标，以便尽快求出更好的解。</p>
+<p>局限：</p>
+<p>不能保证最后的解是最优的；</p>
+<p>不能求最大最小解问题；</p>
+<p>只能求满足某些约束条件的可行解范围。</p>
+<p>基本过程：</p>
+<p>1.从问题的某一初始解出发</p>
+<p>2.while能向给定总目标前进一步</p>
+<p>3.求出可行解的一个解元素</p>
+<p>4.由所有解元素组合成问题的一个可行解</p>
+<p>**经典运用：**装箱问题、找零方案</p>
+<h4 id="六-试探算法回溯法"><strong>六、试探算法（回溯法）</strong></h4>
+<p>在试探算法中，放弃当前候选解，并继续寻找下一个候选解的过程称为回溯。扩大当前候选解的规模，以继续试探的过程称为向前试探。</p>
+<p>（为求得问题的正确解，会先委婉地试探某一种可能情况。在进行试探过程中，一旦发现原来选择的假设情况是不正确的，马上会自觉地退回一步重新选择，然后继续向前试探。反复进行，直到得到解或证明无解时才死心）</p>
+<p>基本步骤：</p>
+<p>1.针对所给问题，定义问题的解空间</p>
+<p>2.确定易于搜索的解空间结构</p>
+<p>3.以深度优先方式搜索解空间，并在搜索过程中用剪枝函数避免无效搜索</p>
+<p>**经典运用：**八皇后问题、29选7彩票组合</p>
+<h4 id="七-迭代算法辗转法"><strong>七、迭代算法（辗转法）</strong></h4>
+<p>是一种不断用变量的旧值递推新值的过程，解决问题时总是重复利用一种方法。</p>
+<p>1.确定迭代变量：直接或间接地不断由旧值递推出新值的变量</p>
+<p>2.建立迭代关系式：新值与旧值的公式或关系。（解决迭代问题的关系）</p>
+<p>3.对迭代过程进行控制：确定迭代过程什么时候结束</p>
+<p>所需的迭代次数是个确定值，可以计算出来：可以构建一个固定次数的循环来实现对迭代过程的控制；</p>
+<p>所需的迭代次数无法确定：需要进一步分析出用来结束迭代过程的条件。</p>
+<p>**经典运用：**求平方根问题</p>
+<h4 id="八-模拟算法思想"><strong>八、模拟算法思想</strong></h4>
+<p>对真实事物或者过程的虚拟。</p>
+<p>**经典运用：**猜数字游戏、掷骰子问题</p>
+<h2 id="排序算法">排序算法</h2>
+<h4 id="一-冒泡排序">一、冒泡排序</h4>
+<p>冒泡排序，从头开始，依次比较数组中相邻的2个元素，如果后面的数比前面的数大，则交换2个数，否则不交换。每进行一轮比较，都会把数组中最大的元素放到最后面。</p>
+<figure data-type="image" tabindex="1"><img src="https://dhl2233.github.io/post-images/1716155792016.png" alt="" loading="lazy"></figure>
+<h4 id="二-快速排序">二、快速排序</h4>
+<p>快速排序的执行流程主要分为如下三步</p>
+<ol>
+<li>从数列中取出一个数作为基准数</li>
+<li>分区，将比它大的数全放到它的右边，小于或等于它的数全放到它的左边</li>
+<li>再对左右区间重复第二步，直到各区间只有一个数</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://dhl2233.github.io/post-images/1716155836632.png" alt="" loading="lazy"></figure>
+<h4 id="三-双路快速排序">三、双路快速排序</h4>
+<p>升级版快速排序，partition 过程使用两个索引值（i、j）用来遍历数组，将 <strong>&lt;v</strong> 的元素放在索引i所指向位置的左边，而将 <strong>&gt;v</strong> 的元素放在索引j所指向位置的右边，<strong>v</strong> 代表标定值。</p>
+<figure data-type="image" tabindex="3"><img src="https://dhl2233.github.io/post-images/1716155842830.png" alt="" loading="lazy"></figure>
+<h4 id="四-插入排序">四、插入排序</h4>
+<p>插入排序的平均时间复杂度也是 O(n^2)，空间复杂度为常数阶 O(1)，具体时间复杂度和数组的有序性也是有关联的。插入排序中，当待排序数组是有序时，是最优的情况，只需当前数跟前一个数比较一下就可以了，这时一共需要比较 N-1 次，时间复杂度为 O(N)。最坏的情况是待排序数组是逆序的，此时需要比较次数最多，最坏的情况是 O(n^2)。</p>
+<p>将数组分为2端，有序数组和无序数组，依次将无序数组中的值插入到无序数组中。可以认为第一个元素为有序数组，后面的值依次插入即可</p>
+<h4 id="五-选择排序">五、选择排序</h4>
+<p>从0索引开始，跟后面的元素一一比较</p>
+<p>小的放前面，大的放后面</p>
+<p>第一次循环结束后，最小的数据已经确定</p>
+<p>第二次循环从1索引开始以此类推</p>
+<p>第三轮循环从2索引开始以此类推</p>
+<p>第四轮循环从3索引开始以此类推。</p>
+<h2 id="查找算法">查找算法</h2>
+<h4 id="1-二分查找法">1、二分查找法</h4>
+<p>又叫折半查找，要求待查找的序列有序。每次取中间位置的值与待查关键字比较，如果中间位置<br>
+的值比待查关键字大，则在前半部分循环这个查找的过程，如果中间位置的值比待查关键字小，<br>
+则在后半部分循环这个查找的过程。直到查找到了为止，否则序列中没有待查的关键字。</p>
+<h4 id="2-分块查找">2、分块查找</h4>
+<p>当数据表中的数据元素很多时，可以采用分块查找。</p>
+<p>汲取了顺序查找和折半查找各自的优点，既有动态结构，又适于快速查找</p>
+<p>分块的原则1：前一块中的最大数据，小于后一块中的所有数据（块内无序，块间有序）</p>
+<p>分块的原则2：块数数量一般等于数字的个数开根号。比如：16个数字一般分为4块左右</p>
+<p>核心思路：先确定要查找的元素在哪一块，然后在块内挨个查找</p>
+<p>分块查找适用于数据较多，但是数据不会发生变化的情况，如果需要一边添加一边查找，建议使用哈希查找</p>
+<p>分块查找的过程：</p>
+<p>需要把数据分成N多小块，块与块之间不能有数据重复的交集。</p>
+<p>给每一块创建对象单独存储到数组当中</p>
+<p>查找数据的时候，先在数组查，当前数据属于哪一块</p>
+<p>再到这一块中顺序查找</p>
+<figure data-type="image" tabindex="4"><img src="https://dhl2233.github.io/post-images/1716155852901.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java基础知识]]></title>
+        <id>https://dhl2233.github.io/post/java-ji-chu-zhi-shi-bi-ji/</id>
+        <link href="https://dhl2233.github.io/post/java-ji-chu-zhi-shi-bi-ji/">
+        </link>
+        <updated>2023-10-01T04:54:05.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="面相对象三要素">面相对象三要素</h2>
+<ul>
+<li>封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。</li>
+<li>继承是一种联结类的层次模型，它提供了一种明确表述共性的方法。新类可以从现有的类中派生，新类继承了原始类的特性，新类称为原始类的派生类（子类），原始类称为新类的基类（父类或超类）。</li>
+<li>多态性是指允许不同的类的对象对同一消息作出响应。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数重名问题。</li>
+</ul>
+<h2 id="第一个-java-程序">第一个 JAVA 程序</h2>
+<p><code>public class HelloWorld {     public static void main(String[] args) {         System.out.println(&quot;Hello World&quot;);     } }</code></p>
+<h1 id="基本数据类型">基本数据类型</h1>
+<pre><code class="language-java">        //byte - 字节型，占用 1 个字节，范围从 -128 到 127。
+        byte a = 100;
+        //short - 短整型，占用 2 个字节，范围从 -32,768 到 32,767。
+        short b = 5000;
+        //int - 整型，占用 4 个字节，范围从 -2^31 到 2^31-1。
+        int c = 123456;
+        //long - 长整型，占用 8 个字节，范围从 -2^63 到 2^63-1。
+        long d = 12345678901L;
+        //float - 单精度浮点型，占用 4 个字节。
+        float e = 5.75f;
+        //double - 双精度浮点型，占用 8 个字节。
+        double f = 19.99;
+        //char - 字符型，占用 2 个字节，用于存储单个字符（如字母和 ASCII 值）。
+        char g = 'A';
+        //boolean - 布尔型，占用 1 位，表示 true 或 false。
+        boolean h = true;
+</code></pre>
+<h2 id="变量类型">变量类型</h2>
+<p>**局部变量（Local Variables）：**局部变量是在方法、构造函数或块内部声明的变量，它们在声明的方法、构造函数或块执行结束后被销毁，局部变量在声明时需要初始化，否则会导致编译错误。</p>
+<p>**实例变量（Instance Variables）：**实例变量是在类中声明，但在方法、构造函数或块之外，它们属于类的实例，每个类的实例都有自己的副本，如果不明确初始化，实例变量会被赋予默认值（数值类型为0，boolean类型为false，对象引用类型为null）。</p>
+<p>**静态变量或类变量（Class Variables）：**类变量是在类中用 static 关键字声明的变量，它们属于类而不是实例，所有该类的实例共享同一个类变量的值，类变量在类加载时被初始化，而且只初始化一次。</p>
+<p>**参数变量（Parameters）：**参数是方法或构造函数声明中的变量，用于接收调用该方法或构造函数时传递的值，参数变量的作用域只限于方法内部。</p>
+<ul>
+<li>**值传递：**在方法调用时，传递的是实际参数的值的副本。当参数变量被赋予新的值时，只会修改副本的值，不会影响原始值。Java 中的基本数据类型都采用值传递方式传递参数变量的值。</li>
+<li>**引用传递：**在方法调用时，传递的是实际参数的引用（即内存地址）。当参数变量被赋予新的值时，会修改原始值的内容。Java 中的对象类型采用引用传递方式传递参数变量的值。</li>
+</ul>
+<h1 id="java-变量命名规则">Java 变量命名规则</h1>
+<p>在 Java 中，不同类型的变量（例如实例变量、局部变量、静态变量等）有一些命名规则和约定。</p>
+<p>遵循一些基本规则，这有助于提高代码的可读性和维护性。</p>
+<p>以下是各种变量命名规则的概述：</p>
+<ul>
+<li><strong>使用有意义的名字：</strong> 变量名应该具有清晰的含义，能够准确地反映变量的用途。避免使用单个字符或无意义的缩写。</li>
+<li><strong>驼峰命名法（Camel Case）：</strong> 在变量名中使用驼峰命名法，即将每个单词的首字母大写，除了第一个单词外，其余单词的首字母都采用大写形式。例如：<code>myVariableName</code>。</li>
+<li><strong>避免关键字：</strong> 不要使用 Java 关键字（例如，class、int、boolean等）作为变量名。</li>
+<li><strong>区分大小写：</strong> Java 是大小写敏感的，因此变量名中的大小写字母被视为不同的符号。例如，<code>myVariable</code> 和 <code>myvariable</code> 是两个不同的变量。</li>
+<li><strong>不以数字开头：</strong> 变量名不能以数字开头，但可以包含数字。</li>
+<li><strong>遵循命名约定：</strong> 对于不同类型的变量（局部变量、实例变量、静态变量等），可以采用不同的命名约定，例如使用前缀或后缀来区分。</li>
+</ul>
+<h3 id="静态变量类变量">静态变量（类变量）</h3>
+<ul>
+<li>使用驼峰命名法，应该以小写字母开头。</li>
+<li>通常也可以使用大写蛇形命名法，全大写字母，单词之间用下划线分隔。</li>
+<li>变量名应该是描述性的，能够清晰地表示其用途。</li>
+</ul>
+<p><code>// 使用驼峰命名法</code><br>
+<code>public static int myStaticVariable;</code></p>
+<p><code>// 使用大写蛇形命名法</code><br>
+<code>public static final int MAX_SIZE = 100;</code></p>
+<h1 id="java-修饰符">Java 修饰符</h1>
+<h2 id="访问控制修饰符">访问控制修饰符</h2>
+<p>Java中，可以使用访问控制符来保护对类、变量、方法和构造方法的访问。Java 支持 4 种不同的访问权限。</p>
+<ul>
+<li><strong>default</strong> (即默认，什么也不写）: 在同一包内可见，不使用任何修饰符。使用对象：类、接口、变量、方法。</li>
+<li><strong>private</strong> : 在同一类内可见。使用对象：变量、方法。 <strong>注意：不能修饰类（外部类）</strong></li>
+<li><strong>public</strong> : 对所有类可见。使用对象：类、接口、变量、方法</li>
+<li><strong>protected</strong> : 对同一包内的类和所有子类可见。使用对象：变量、方法。 <strong>注意：不能修饰类（外部类）</strong>。<br>
+<img src="https://dhl2233.github.io/post-images/1715155425703.png" alt="" loading="lazy"></li>
+</ul>
+<h3 id="static-修饰符">static 修饰符</h3>
+<ul>
+<li>
+<p><strong>静态变量：</strong></p>
+<p>static 关键字用来声明独立于对象的静态变量，无论一个类实例化多少对象，它的静态变量只有一份拷贝。 静态变量也被称为类变量。局部变量不能被声明为 static 变量。</p>
+</li>
+<li>
+<p><strong>静态方法：</strong></p>
+<p>static 关键字用来声明独立于对象的静态方法。静态方法不能使用类的非静态变量。静态方法从参数列表得到数据，然后计算这些数据。</p>
+</li>
+</ul>
+<h3 id="final-修饰符">final 修饰符</h3>
+<p><strong>final 变量：</strong></p>
+<p>final 表示&quot;最后的、最终的&quot;含义，变量一旦赋值后，不能被重新赋值。被 final 修饰的实例变量必须显式指定初始值。</p>
+<p>final 修饰符通常和 static 修饰符一起使用来创建类常量。</p>
+<p><strong>final 方法</strong></p>
+<p>父类中的 final 方法可以被子类继承，但是不能被子类重写。</p>
+<p>声明 final 方法的主要目的是防止该方法的内容被修改。</p>
+<p><strong>final 类</strong></p>
+<p>final 类不能被继承，没有类能够继承 final 类的任何特性。</p>
+<h3 id="abstract-修饰符">abstract 修饰符</h3>
+<p><strong>抽象类：</strong></p>
+<p>抽象类不能用来实例化对象，声明抽象类的唯一目的是为了将来对该类进行扩充。</p>
+<p>一个类不能同时被 abstract 和 final 修饰。如果一个类包含抽象方法，那么该类一定要声明为抽象类，否则将出现编译错误。</p>
+<p>抽象类可以包含抽象方法和非抽象方法。</p>
+<p><strong>抽象方法</strong></p>
+<p>抽象方法是一种没有任何实现的方法，该方法的具体实现由子类提供。</p>
+<p>抽象方法不能被声明成 final 和 static。</p>
+<p>任何继承抽象类的子类必须实现父类的所有抽象方法，除非该子类也是抽象类。</p>
+<p>如果一个类包含若干个抽象方法，那么该类必须声明为抽象类。抽象类可以不包含抽象方法。</p>
+<h1 id="java-string-stringbuffer-和-stringbuilder-类">Java String、StringBuffer 和 StringBuilder 类</h1>
+<p>String 类是不可改变的，所以你一旦创建了 String 对象，那它的值就无法改变了</p>
+<p>和 String 类不同的是，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。</p>
+<p>StringBuffer是线程安全的，它的所有公开方法都是通过内部的synchronized修饰来实现同步的，从而保证了多线程环境下的数据一致性。因此，在多线程环境下，如果有多个线程同时访问和修改同一个StringBuffer对象，不会出现数据不一致的问题。</p>
+<p>与StringBuffer不同，StringBuilder并没有使用synchronized修饰其方法，因此它是线程不安全的。在单线程环境下，StringBuilder的性能要优于StringBuffer，因为它避免了不必要的同步开销。但是，在多线程环境下，如果多个线程同时访问和修改同一个StringBuilder对象，就可能导致数据不一致的问题。</p>
+<h1 id="java-异常处理">Java 异常处理</h1>
+<p>**检查性异常：**最具代表的检查性异常是用户错误或问题引起的异常，这些异常在编译时强制要求程序员处理。例如要打开一个不存在文件时，一个异常就发生了，这些异常在编译时不能被简单地忽略。</p>
+<p>这类异常通常使用 <strong>try-catch</strong> 块来捕获并处理异常，或者在方法声明中使用 <strong>throws</strong> 子句声明方法可能抛出的异常。</p>
+<p><strong>运行时异常：</strong> 些异常在编译时不强制要求处理，通常是由程序中的错误引起的，例如 NullPointerException、ArrayIndexOutOfBoundsException 等，这类异常可以选择处理，但并非强制要求。</p>
+<p><strong>错误：</strong> 错误不是异常，而是脱离程序员控制的问题，错误在代码中通常被忽略。例如，当栈溢出时，一个错误就发生了，它们在编译也检查不到的。</p>
+<p>Java 提供了以下关键字和类来支持异常处理：</p>
+<ul>
+<li><strong>try</strong>：用于包裹可能会抛出异常的代码块。</li>
+<li><strong>catch</strong>：用于捕获异常并处理异常的代码块。</li>
+<li><strong>finally</strong>：用于包含无论是否发生异常都需要执行的代码块。</li>
+<li><strong>throw</strong>：用于手动抛出异常。</li>
+<li><strong>throws</strong>：用于在方法声明中指定方法可能抛出的异常。</li>
+<li><strong>Exception</strong>类：是所有异常类的父类，它提供了一些方法来获取异常信息，如 <strong>getMessage()、printStackTrace()</strong> 等。</li>
+</ul>
+<h2 id="exception-类的层次">Exception 类的层次</h2>
+<p>所有的异常类是从 java.lang.Exception 类继承的子类。</p>
+<p>Exception 类是 Throwable 类的子类。除了Exception类外，Throwable还有一个子类Error 。</p>
+<p>Java 程序通常不捕获错误。错误一般发生在严重故障时，它们在Java程序处理的范畴之外。</p>
+<p>Error 用来指示运行时环境发生的错误。</p>
+<p>例如，JVM 内存溢出。一般地，程序不会从错误中恢复。</p>
+<p>异常类有两个主要的子类：IOException 类和 RuntimeException 类。</p>
+<h1 id="java-集合框架">Java 集合框架</h1>
+<figure data-type="image" tabindex="1"><img src="https://dhl2233.github.io/post-images/1715155434178.png" alt="" loading="lazy"></figure>
+<h2 id="如何使用迭代器">如何使用迭代器</h2>
+<p>通常情况下，你会希望遍历一个集合中的元素。例如，显示集合中的每个元素。</p>
+<p>一般遍历数组都是采用for循环或者增强for，这两个方法也可以用在集合框架，但是还有一种方法是采用迭代器遍历集合框架，它是一个对象，实现了<a href="https://www.runoob.com/java/java-iterator.html">Iterator</a> 接口或 ListIterator接口。</p>
+<p>迭代器，使你能够通过循环来得到或删除集合的元素。ListIterator 继承了 Iterator，以允许双向遍历列表和修改元素。</p>
+<h3 id="使用迭代器遍历-arraylist">使用迭代器遍历 ArrayList</h3>
+<pre><code>public static void main(String[] args) {
+    // 创建一个 ArrayList
+    ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;();
+    names.add(&quot;Alice&quot;);
+    names.add(&quot;Bob&quot;);
+    names.add(&quot;Charlie&quot;);
+
+    // 获取迭代器
+    Iterator&lt;String&gt; it = names.iterator();
+
+    // 使用迭代器遍历 ArrayList
+    while (it.hasNext()) {
+        String name = it.next();
+        System.out.println(name);
+    }
+}
+</code></pre>
+<h3 id="在遍历时删除元素">在遍历时删除元素</h3>
+<pre><code>public static void main(String[] args) {
+    // 创建一个 ArrayList
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+    numbers.add(1);
+    numbers.add(2);
+    numbers.add(3);
+    numbers.add(4);
+    numbers.add(5);
+
+    // 获取迭代器
+    Iterator&lt;Integer&gt; it = numbers.iterator();
+
+    // 遍历并删除偶数
+    while (it.hasNext()) {
+        Integer number = it.next();
+        if (number % 2 == 0) {
+            it.remove(); // 删除当前元素
+        }
+    }
+
+    // 再次使用迭代器输出剩余元素
+    it = numbers.iterator();
+    while (it.hasNext()) {
+        System.out.println(it.next());
+    }
+}
+</code></pre>
+<h3 id="使用-listiterator-遍历-list">使用 ListIterator 遍历 List</h3>
+<pre><code>public static void main(String[] args) {
+    // 创建一个 LinkedList
+    LinkedList&lt;String&gt; names = new LinkedList&lt;&gt;();
+    names.add(&quot;Alice&quot;);
+    names.add(&quot;Bob&quot;);
+    names.add(&quot;Charlie&quot;);
+
+    // 获取 ListIterator
+    ListIterator&lt;String&gt; listIt = names.listIterator();
+
+    // 正向遍历列表
+    System.out.println(&quot;Forward traversal:&quot;);
+    while (listIt.hasNext()) {
+        System.out.println(listIt.next());
+    }
+
+    // 反向遍历列表
+    System.out.println(&quot;Backward traversal:&quot;);
+    while (listIt.hasPrevious()) {
+        System.out.println(listIt.previous());
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用Java Swing实现一个俄罗斯方块]]></title>
+        <id>https://dhl2233.github.io/post/shi-yong-java-swing-shi-xian-yi-ge-e-luo-si-fang-kuai/</id>
+        <link href="https://dhl2233.github.io/post/shi-yong-java-swing-shi-xian-yi-ge-e-luo-si-fang-kuai/">
+        </link>
+        <updated>2022-06-08T05:11:03.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF">设计思路</a></li>
+<li><a href="#%E6%B6%89%E5%8F%8A%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE">涉及变量及其初始化数据</a></li>
+<li><a href="#%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD">要实现的基本功能</a>
+<ul>
+<li><a href="#1%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%904%E7%A7%8D%E6%96%B9%E5%9D%97%E4%B8%AD%E7%9A%84%E4%B8%80%E7%A7%8D">1.随机生成4种方块中的一种</a>
+<ul>
+<li><a href="#2%E9%9A%8F%E6%97%B6%E9%97%B4%E4%B8%8B%E8%90%BD">2.随时间下落</a></li>
+</ul>
+</li>
+<li><a href="#3%E6%8C%89w%E9%94%AE%E6%97%8B%E8%BD%AC">3.按W键旋转</a></li>
+<li><a href="#4%E6%8C%89ad%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8">4.按AD左右移动</a>
+<ul>
+<li><a href="#5%E6%8C%89a%E6%97%B6%E5%88%B0%E8%BE%BE%E5%B7%A6%E8%BE%B9%E7%95%8C%E7%A6%81%E6%AD%A2%E7%BB%A7%E7%BB%AD%E7%A7%BB%E5%8A%A8">5.按A时到达左边界禁止继续移动</a></li>
+<li><a href="#6%E6%8C%89d%E6%97%B6%E5%88%B0%E8%BE%BE%E5%B7%A6%E8%BE%B9%E7%95%8C%E7%A6%81%E6%AD%A2%E7%BB%A7%E7%BB%AD%E7%A7%BB%E5%8A%A8">6.按D时到达左边界禁止继续移动</a></li>
+</ul>
+</li>
+<li><a href="#7%E6%8C%89s%E4%B8%8B%E9%99%8D">7.按S下降</a>
+<ul>
+<li><a href="#8%E5%88%B0%E8%BE%BE%E5%BA%95%E9%83%A8%E5%81%9C%E6%AD%A2">8.到达底部停止</a></li>
+<li><a href="#9%E5%88%B0%E8%BE%BE%E5%85%B6%E4%BB%96%E6%96%B9%E5%9D%97%E4%B8%8A%E6%97%B6%E5%81%9C%E6%AD%A2">9.到达其他方块上时停止</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B6%88%E9%99%A4%E5%8A%9F%E8%83%BD">消除功能</a>
+<ul>
+<li><a href="#1%E9%93%BA%E6%BB%A1%E4%B8%80%E8%A1%8C%E6%B6%88%E9%99%A4">1.铺满一行消除</a></li>
+<li><a href="#2%E6%B6%88%E9%99%A4%E7%9A%84%E9%83%A8%E5%88%86%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%89%80%E6%9C%89%E6%96%B9%E5%9D%97%E9%83%BD%E4%B8%8B%E9%99%8D%E4%B8%80%E6%A0%BC">2.消除的部分上面的所有方块都下降一格</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B8%B8%E6%88%8F%E7%BB%93%E6%9D%9F">游戏结束</a></li>
+</ul>
+</li>
+</ul>
+(半学期Java学习，写一个简单的俄罗斯方块)</p>
+<h1 id="设计思路">设计思路</h1>
+<p>要在窗口中描绘俄罗斯方块，使用Java提供的paint（Graphics g）用来在窗口上显示方块，所以我的主类是继承了JFrame类<br>
+然后由于要通过键盘控制方块的移动及旋转，和方块自动下落，所以我是实现了KeyListener,和ActionListener两个接口。</p>
+<h1 id="涉及变量及其初始化数据">涉及变量及其初始化数据</h1>
+<pre><code class="language-javascript">int X[][];//方块的四个组成块X坐标
+	 int Y[][];//方块的四个组成块Y坐标
+	 int Direction;//方块的方向
+	 Timer timer;//时间监视器用于方块随时间下落
+	 int map_X;
+	 int map_Y;//地图的xy坐标
+	 int map_r;
+	 int width;//小方块的宽度
+	 int map_Width;//地图的宽度
+	 int number;//用于记录当前是第几个方块
+	 int n;//随机数：0，1，2，3，4分别对应五种方块
+	 int di;//停止的方块编号
+	 int soure;//最后的得分
+	 public myFrame() {//无参构造方法，初始化数据
+		 X=new int[100][4];
+		 Y=new int[100][4];//在这里我用的是二维数组来表示每一个方块的四个小方块的XY坐标
+		 width=20;//每个小方块的宽度
+		 map_X=width*2;
+		 map_Y=width*2;//地图的坐标
+		 map_Width=300;//地图的宽度
+		 map_r=map_X+map_Width-width;
+		 Direction=KeyEvent.VK_W;
+		 number=0;
+		 di=0;
+		 soure=0;
+		 Creat();
+		 this.addKeyListener(this);//添加按键监视器
+		 timer=new Timer(1000, this);//添加时间监视器，用于方块下落
+		 timer.start();
+		 repaint();//画图方法，重绘界面
+	 }
+</code></pre>
+<h1 id="要实现的基本功能">要实现的基本功能</h1>
+<h2 id="1随机生成4种方块中的一种">1.随机生成4种方块中的一种</h2>
+<p>在这里首先我使用的是random（）函数，生成一个0~4之间的整数（包括0和4），它们每个数代表<br>
+一种方块</p>
+<pre><code class="language-javascript">public void Creat() {//方块的初始状态
+		 Random random = new Random();
+		 n=random.nextInt()%5;
+		 if (n&lt;0) {
+			n=-n;
+		}
+		 System.out.println(number);
+		 if (n==0) {
+			 X[number][0]=180;
+			 Y[number][0]=40;
+			 X[number][1]=160;
+			 Y[number][1]=60;
+			 X[number][2]=180;
+			 Y[number][2]=60;
+			 X[number][3]=200;
+			 Y[number][3]=60;
+		
+		}
+		 if (n==1) {
+			 X[number][0]=180;
+			 Y[number][0]=40;
+			 X[number][1]=180;
+			 Y[number][1]=60;
+			 X[number][2]=200;
+			 Y[number][2]=40;
+			 X[number][3]=200;
+			 Y[number][3]=60;
+		
+		}
+		 if (n==2) {
+			 X[number][0]=180;
+			 Y[number][0]=40;
+			 X[number][1]=200;
+			 Y[number][1]=40;
+			 X[number][2]=200;
+			 Y[number][2]=60;
+			 X[number][3]=200;
+			 Y[number][3]=80;
+		
+		}
+		 if (n==3) {
+			 X[number][0]=180;
+			 Y[number][0]=40;
+			 X[number][1]=180;
+			 Y[number][1]=60;
+			 X[number][2]=180;
+			 Y[number][2]=80;
+			 X[number][3]=180;
+			 Y[number][3]=100;
+		
+		}
+		 if (n==4) {
+			 X[number][0]=180;
+			 Y[number][0]=40;
+			 X[number][1]=200;
+			 Y[number][1]=40;
+			 X[number][2]=160;
+			 Y[number][2]=60;
+			 X[number][3]=180;
+			 Y[number][3]=60;
+		}
+	}
+</code></pre>
+<h3 id="2随时间下落">2.随时间下落</h3>
+<p>实现了ActionListener中的actionPerformed(ActionEvent e)方法</p>
+<pre><code class="language-javascript">	public void actionPerformed(ActionEvent e) {//下落
+		Y[number][0]+=width;
+		Y[number][1]+=width;
+		Y[number][2]+=width;
+		Y[number][3]+=width;
+		Stop();
+		Stop2();
+		repaint();
+	}
+</code></pre>
+<h2 id="3按w键旋转">3.按W键旋转</h2>
+<p>这里主要是使用了按键监视器，初始化时已经将当前的“方向设置成了“W””</p>
+<pre><code class="language-mermaid">graph LR
+A--&gt; e
+A --&gt; C
+B --&gt; D
+C --&gt; D
+</code></pre>
+<h2 id="4按ad左右移动">4.按AD左右移动</h2>
+<h3 id="5按a时到达左边界禁止继续移动">5.按A时到达左边界禁止继续移动</h3>
+<h3 id="6按d时到达左边界禁止继续移动">6.按D时到达左边界禁止继续移动</h3>
+<h2 id="7按s下降">7.按S下降</h2>
+<h3 id="8到达底部停止">8.到达底部停止</h3>
+<h3 id="9到达其他方块上时停止">9.到达其他方块上时停止</h3>
+<h2 id="消除功能">消除功能</h2>
+<h3 id="1铺满一行消除">1.铺满一行消除</h3>
+<h3 id="2消除的部分上面的所有方块都下降一格">2.消除的部分上面的所有方块都下降一格</h3>
+<h2 id="游戏结束">游戏结束</h2>
+]]></content>
+    </entry>
+</feed>

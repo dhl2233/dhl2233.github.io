@@ -1,0 +1,246 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>常用算法设计思想 | 刘冬辉的个人博客</title>
+
+<link rel="shortcut icon" href="https://dhl2233.github.io/favicon.ico?v=1716159646223">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://dhl2233.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+    
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            刘冬辉的个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1716159646223"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    常用算法设计思想
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-10-02 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h4 id="八大算法枚举-递推-递归-分治-贪心-试探法-动态迭代和模拟算法思想"><strong>八大算法：枚举、递推、递归、分治、贪心、试探法、动态迭代和模拟算法思想。</strong></h4>
+<h4 id="一-枚举算法思想暴力算法">一、枚举算法思想（暴力算法）</h4>
+<p>将问题的所有可能答案一一列举，根据判断条件判断此答案是否合适，一般用循环实现。</p>
+<p>**经典运用：**百钱买百鸡、填写运算符</p>
+<h4 id="二-递推算法思想">二、递推算法思想</h4>
+<p>1.顺推法：从已知条件出发，逐步推算出要解决问题的方法。</p>
+<p>2.逆推法：从已知结果出发，用迭代表达式逐步推算出问题开始的条件，即顺推法的逆过程。</p>
+<p>**经典运用：**斐波那契数列（顺推法）、银行存款（逆推法）</p>
+<h4 id="三-递归算法思想">三、递归算法思想</h4>
+<p>1.递归过程一般通过函数或子过程实现；</p>
+<p>2.递归算法在函数或子过程的内部，直接或间接调用自己的算法</p>
+<p>3.递归算法实际上是把问题转化为规模缩小了的同类问题的子问题，然后再递归调用函数或过程来表示问题的解</p>
+<p>注意：必须有一个明确的递归结束条件；如果递归次数过多，容易造成栈溢出。</p>
+<p>**经典运用：**汉诺塔问题、阶乘问题</p>
+<h4 id="四-分治算法思想"><strong>四、分治算法思想</strong></h4>
+<p>将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。只要求出子问题的解，就可得到原问题的解。</p>
+<p>一般步骤：</p>
+<p>1.分解，将要解决的问题划分成若干个规模较小的同类问题</p>
+<p>2.求解，当子问题划分得足够小时，用较简单的方法解决</p>
+<p>3.合并，按原问题的要求，将子问题的解逐层合并构成原问题的解</p>
+<p>**经典运用：**大数相乘问题、比赛日程安排</p>
+<h4 id="五-贪心算法思想"><strong>五、贪心算法思想</strong></h4>
+<p>从问题的某一个初始解出发，逐步逼近给定的目标，以便尽快求出更好的解。</p>
+<p>局限：</p>
+<p>不能保证最后的解是最优的；</p>
+<p>不能求最大最小解问题；</p>
+<p>只能求满足某些约束条件的可行解范围。</p>
+<p>基本过程：</p>
+<p>1.从问题的某一初始解出发</p>
+<p>2.while能向给定总目标前进一步</p>
+<p>3.求出可行解的一个解元素</p>
+<p>4.由所有解元素组合成问题的一个可行解</p>
+<p>**经典运用：**装箱问题、找零方案</p>
+<h4 id="六-试探算法回溯法"><strong>六、试探算法（回溯法）</strong></h4>
+<p>在试探算法中，放弃当前候选解，并继续寻找下一个候选解的过程称为回溯。扩大当前候选解的规模，以继续试探的过程称为向前试探。</p>
+<p>（为求得问题的正确解，会先委婉地试探某一种可能情况。在进行试探过程中，一旦发现原来选择的假设情况是不正确的，马上会自觉地退回一步重新选择，然后继续向前试探。反复进行，直到得到解或证明无解时才死心）</p>
+<p>基本步骤：</p>
+<p>1.针对所给问题，定义问题的解空间</p>
+<p>2.确定易于搜索的解空间结构</p>
+<p>3.以深度优先方式搜索解空间，并在搜索过程中用剪枝函数避免无效搜索</p>
+<p>**经典运用：**八皇后问题、29选7彩票组合</p>
+<h4 id="七-迭代算法辗转法"><strong>七、迭代算法（辗转法）</strong></h4>
+<p>是一种不断用变量的旧值递推新值的过程，解决问题时总是重复利用一种方法。</p>
+<p>1.确定迭代变量：直接或间接地不断由旧值递推出新值的变量</p>
+<p>2.建立迭代关系式：新值与旧值的公式或关系。（解决迭代问题的关系）</p>
+<p>3.对迭代过程进行控制：确定迭代过程什么时候结束</p>
+<p>所需的迭代次数是个确定值，可以计算出来：可以构建一个固定次数的循环来实现对迭代过程的控制；</p>
+<p>所需的迭代次数无法确定：需要进一步分析出用来结束迭代过程的条件。</p>
+<p>**经典运用：**求平方根问题</p>
+<h4 id="八-模拟算法思想"><strong>八、模拟算法思想</strong></h4>
+<p>对真实事物或者过程的虚拟。</p>
+<p>**经典运用：**猜数字游戏、掷骰子问题</p>
+<h2 id="排序算法">排序算法</h2>
+<h4 id="一-冒泡排序">一、冒泡排序</h4>
+<p>冒泡排序，从头开始，依次比较数组中相邻的2个元素，如果后面的数比前面的数大，则交换2个数，否则不交换。每进行一轮比较，都会把数组中最大的元素放到最后面。</p>
+<figure data-type="image" tabindex="1"><img src="https://dhl2233.github.io/post-images/1716155792016.png" alt="" loading="lazy"></figure>
+<h4 id="二-快速排序">二、快速排序</h4>
+<p>快速排序的执行流程主要分为如下三步</p>
+<ol>
+<li>从数列中取出一个数作为基准数</li>
+<li>分区，将比它大的数全放到它的右边，小于或等于它的数全放到它的左边</li>
+<li>再对左右区间重复第二步，直到各区间只有一个数</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://dhl2233.github.io/post-images/1716155836632.png" alt="" loading="lazy"></figure>
+<h4 id="三-双路快速排序">三、双路快速排序</h4>
+<p>升级版快速排序，partition 过程使用两个索引值（i、j）用来遍历数组，将 <strong>&lt;v</strong> 的元素放在索引i所指向位置的左边，而将 <strong>&gt;v</strong> 的元素放在索引j所指向位置的右边，<strong>v</strong> 代表标定值。</p>
+<figure data-type="image" tabindex="3"><img src="https://dhl2233.github.io/post-images/1716155842830.png" alt="" loading="lazy"></figure>
+<h4 id="四-插入排序">四、插入排序</h4>
+<p>插入排序的平均时间复杂度也是 O(n^2)，空间复杂度为常数阶 O(1)，具体时间复杂度和数组的有序性也是有关联的。插入排序中，当待排序数组是有序时，是最优的情况，只需当前数跟前一个数比较一下就可以了，这时一共需要比较 N-1 次，时间复杂度为 O(N)。最坏的情况是待排序数组是逆序的，此时需要比较次数最多，最坏的情况是 O(n^2)。</p>
+<p>将数组分为2端，有序数组和无序数组，依次将无序数组中的值插入到无序数组中。可以认为第一个元素为有序数组，后面的值依次插入即可</p>
+<h4 id="五-选择排序">五、选择排序</h4>
+<p>从0索引开始，跟后面的元素一一比较</p>
+<p>小的放前面，大的放后面</p>
+<p>第一次循环结束后，最小的数据已经确定</p>
+<p>第二次循环从1索引开始以此类推</p>
+<p>第三轮循环从2索引开始以此类推</p>
+<p>第四轮循环从3索引开始以此类推。</p>
+<h2 id="查找算法">查找算法</h2>
+<h4 id="1-二分查找法">1、二分查找法</h4>
+<p>又叫折半查找，要求待查找的序列有序。每次取中间位置的值与待查关键字比较，如果中间位置<br>
+的值比待查关键字大，则在前半部分循环这个查找的过程，如果中间位置的值比待查关键字小，<br>
+则在后半部分循环这个查找的过程。直到查找到了为止，否则序列中没有待查的关键字。</p>
+<h4 id="2-分块查找">2、分块查找</h4>
+<p>当数据表中的数据元素很多时，可以采用分块查找。</p>
+<p>汲取了顺序查找和折半查找各自的优点，既有动态结构，又适于快速查找</p>
+<p>分块的原则1：前一块中的最大数据，小于后一块中的所有数据（块内无序，块间有序）</p>
+<p>分块的原则2：块数数量一般等于数字的个数开根号。比如：16个数字一般分为4块左右</p>
+<p>核心思路：先确定要查找的元素在哪一块，然后在块内挨个查找</p>
+<p>分块查找适用于数据较多，但是数据不会发生变化的情况，如果需要一边添加一边查找，建议使用哈希查找</p>
+<p>分块查找的过程：</p>
+<p>需要把数据分成N多小块，块与块之间不能有数据重复的交集。</p>
+<p>给每一块创建对象单独存储到数组当中</p>
+<p>查找数据的时候，先在数组查，当前数据属于哪一块</p>
+<p>再到这一块中顺序查找</p>
+<figure data-type="image" tabindex="4"><img src="https://dhl2233.github.io/post-images/1716155852901.jpg" alt="" loading="lazy"></figure>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://dhl2233.github.io/post/java-ji-chu-zhi-shi-bi-ji/" class="post-title gt-a-link">
+                    Java基础知识
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">日日行能走千里路，时时学能破万卷书</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Design by 刘冬辉<a href="https://github.com/dhl2233" target="_blank">个人github</a>
+    </div>
+    <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://dhl2233.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

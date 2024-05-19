@@ -1,0 +1,362 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>消息中间件的使用 | 刘冬辉的个人博客</title>
+
+<link rel="shortcut icon" href="https://dhl2233.github.io/favicon.ico?v=1716159646223">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://dhl2233.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+    
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            刘冬辉的个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1716159646223"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    消息中间件的使用
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-10-06 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h2 id="为什么要使用消息队列的使用">为什么要使用消息队列的使用</h2>
+<h3 id="1-解耦">1. 解耦</h3>
+<p><strong>解耦合</strong>：</p>
+<ul>
+<li>消息队列允许各个服务之间进行松散耦合。生产者（发送消息的应用）和消费者（接收消息的应用）不需要直接交互，只需通过消息队列进行通信。这意味着生产者和消费者可以独立地开发、扩展和维护。</li>
+</ul>
+<h3 id="2-异步处理">2. 异步处理</h3>
+<p><strong>异步通信</strong>：</p>
+<ul>
+<li>消息队列允许生产者在发送消息后继续执行而不必等待消费者处理完消息。这提高了系统的响应速度和吞吐量。例如，用户注册后，系统可以立即返回响应，而邮件通知等操作可以异步处理。</li>
+</ul>
+<h3 id="3-负载均衡">3. 负载均衡</h3>
+<p><strong>负载均衡和伸缩性</strong>：</p>
+<ul>
+<li>消息队列可以分发消息到多个消费者，从而实现负载均衡。可以根据流量情况增加或减少消费者的数量，以应对高峰负载，确保系统在高并发场景下的稳定性和性能。</li>
+</ul>
+<h3 id="4-高可用性">4. 高可用性</h3>
+<p><strong>高可用性和容错</strong>：</p>
+<ul>
+<li>现代消息队列通常支持持久化、复制和分布式架构，确保消息不会因单点故障而丢失。即使某个消费者出现故障，消息队列也能保证消息不丢失，待消费者恢复后继续处理消息。</li>
+</ul>
+<h3 id="5-流量削峰">5. 流量削峰</h3>
+<p><strong>流量削峰填谷</strong>：</p>
+<ul>
+<li>在高峰期，消息队列可以充当缓冲器，将大量的请求消息暂时存储起来，逐步让消费者处理，从而避免后端服务被瞬时高流量冲击。</li>
+</ul>
+<h3 id="6-异构系统集成">6. 异构系统集成</h3>
+<p><strong>异构系统集成</strong>：</p>
+<ul>
+<li>消息队列可以作为不同技术栈和系统之间的桥梁，简化异构系统的集成。不同的服务只需遵循相同的消息格式和协议，即可通过消息队列进行通信。</li>
+</ul>
+<h3 id="7-保证消息顺序">7. 保证消息顺序</h3>
+<p><strong>保证消息顺序</strong>：</p>
+<ul>
+<li>在某些业务场景中，消息的处理顺序至关重要。消息队列可以保证消息按顺序被消费，确保业务逻辑的正确性。</li>
+</ul>
+<h3 id="8-可伸缩的任务队列">8. 可伸缩的任务队列</h3>
+<p><strong>任务队列</strong>：</p>
+<ul>
+<li>消息队列可以用于分发任务。例如，一个后台处理系统将任务（如图像处理、视频转码）放入消息队列，多个工作者从队列中获取任务并处理，从而实现任务的并行处理和负载均衡。</li>
+</ul>
+<h2 id="kafka">KafKa</h2>
+<p>Kafka 由 Producer、Broker、Consumer 以及负责集群管理的 ZooKeeper 组成，各部分功能如下：</p>
+<pre><code>Producer：生产者，负责消息的创建并通过一定的路由策略发送消息到合适的 Broker；
+Broker：服务实例，负责消息的持久化、中转等功能；
+Consumer ：消费者，负责从 Broker 中拉取（Pull）订阅的消息并进行消费，通常多个消费者构成一个分组，消息只能被同组中的一个消费者消费；
+ZooKeeper：负责 broker、consumer 集群元数据的管理等；（注意：Producer 端直接连接 broker，不在 zk 上存任何数据，只是通过 ZK 监听 broker 和 topic 等信息）
+</code></pre>
+<p>消息流转过程中，还有几个特别重要的概念—主题（Topic）、分区（Partition）、分段(segment)、位移（offset）。</p>
+<pre><code>topic：消息主题。Kafka 按 topic 对消息进行分类，我们在收发消息时只需指定 topic。
+partition：分区。为了提升系统的吞吐，一个 topic 下通常有多个 partition，partition 分布在不同的 Broker 上，用于存储 topic 的消息，这使 Kafka 可以在多台机器上处理、存储消息，给 kafka 提供给了并行的消息处理能力和横向扩容能力。另外，为了提升系统的可靠性，partition 通常会分组，且每组有一个主 partition、多个副本 partition，且分布在不同的 broker 上，从而起到容灾的作用。
+segment：分段。宏观上看，一个 partition 对应一个日志（Log）。由于生产者生产的消息会不断追加到 log 文件末尾，为防止 log 文件过大导致数据检索效率低下，Kafka 采取了分段和索引机制，将每个 partition 分为多个 segment，同时也便于消息的维护和清理。每个 segment 包含一个.log 日志文件、两个索引(.index、timeindex)文件以及其他可能的文件。每个 Segment 的数据文件以该段中最小的 offset 为文件名，当查找 offset 的 Message 的时候，通过二分查找快找到 Message 所处于的 Segment 中。
+offset：消息在日志中的位置，消息在被追加到分区日志文件的时候都会分配一个特定的偏移量。offset 是消息在分区中的唯一标识，是一个单调递增且不变的值。Kafka 通过它来保证消息在分区内的顺序性，不过 offset 并不跨越分区，也就是说，Kafka 保证的是分区有序而不是主题有序。
+</code></pre>
+<h2 id="rabbitmq">RabbitMQ</h2>
+<h3 id="rabbitmq六种消息模式">RabbitMQ六种消息模式</h3>
+<pre><code>    1.Simple Work Queue（简单工作队列）：常见的一对一模式，一条消息由一个消费者进行消费。如果有多个消费者，默认是使用轮询的方式将消息分配消费者
+
+    2.Work Queues（工作队列模式）：也叫公屏队列，能者多劳的消息队列模型。队列必须收到来自消费者的手动ACK（消息确认机制）才可以继续往消费者发送消息。
+
+    3.Publish/Subscribe（发布订阅模式）：一条消息被多和消费者消费。
+
+    4.Ruoting（路由模式）：有选择的接收消息。
+
+    5.Topics（主题模式）：通过一定的规则来选择性的接收消息
+
+    6.RPC模式：发布者发布消息，并且通过RPC方式等待结果。
+</code></pre>
+<h3 id="rabbitmq保证消息的可靠性">RabbitMQ保证消息的可靠性</h3>
+<pre><code>需要使用RabbitMQ发送端确认机制，确认消息成功发送到RabbitMQ并被处理
+需要使用RabbitMQ消息返回机制，若没发现目标队列，中间件会通知发送方
+需要使RabbitMQ消息端确认消息，确认消息没有发生异常
+需要使用RabbitMQ消费端限流机制，限制消息推送速度 ，保障接受端服务稳定
+大量到堆积消息会给RabbitMQ产生很大到压力，需要使用RabbitMQ消息过期时间，防止消息大量积压
+过期后会直接丢弃, 不符合业务逻辑，需要使用RabbitMQ死信队列，收集过期消息，以供分析
+</code></pre>
+<h3 id="单条同步确认机制">单条同步确认机制</h3>
+<pre><code>配置channel，开启确认模式：channel.confirmSelect()
+每发送一条消息，调用channel.waitForConfirms()方法等待确认
+
+	//建立连接
+    ConnectionFactory connectionFactory = new ConnectionFactory();
+    connectionFactory.setHost(&quot;127.0.0.1&quot;);
+    Connection connection = connectionFactory.newConnection();
+    Channel channel = connection.createChannel();
+    String message = objectMapper.writeValueAsString(orderMessageDTO);
+    channel.confirmSelect();
+    channel.basicPublish(
+            &quot;exhange.order.restaurant&quot;,
+            &quot;key.restaurant&quot;,
+            null,
+            message.getBytes());
+    if(channel.waitForConfirms()){
+        //表示发送确认处理逻辑
+    }else{
+        //发送失败
+    }
+</code></pre>
+<h3 id="消息返回机制">消息返回机制</h3>
+<pre><code>消息发送后，发送端不知道消息是否被正确路由，若路由异常，消息会被丢弃，业务异常，需要使用RabbitMQ消息返回机制，确认消息被正确路由
+</code></pre>
+<p>消息的开启方法：</p>
+<pre><code>在RabbitMQ基础配置中又有一个关键配置项：Mandatory
+
+Mandatory若为false，RabbitMQ将直接丢弃无法路由的消息
+
+Mandatory若为true，RabbitMQ才会处理无法路由的消息
+</code></pre>
+<pre><code>DeliverCallback deliverCallback = ((consumerTag, message) -&gt; {
+        //拿到消息
+        String messageBody = new String(message.getBody());
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost(&quot;127.0.0.1&quot;);
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.addReturnListener(new ReturnListener() {
+                @Override
+                public void handleReturn(int replyCode, String replyText, String exchange, String routingKey, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                    log.info(&quot;Message Return:&quot;);
+                    //处理失败的业务逻辑
+                }
+            });
+            channel.basicPublish(
+                    &quot;exhange.order.restaurant&quot;,
+                    &quot;key.restaurant&quot;,
+                    true,
+                    null,
+                    messageBody.getBytes());
+
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+    });
+
+</code></pre>
+<h2 id="二者之间区别">二者之间区别</h2>
+<h3 id="1-设计理念">1. 设计理念</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>主要设计为一个分布式日志记录系统，专注于高吞吐量和持久化存储。</li>
+<li>采用发布/订阅模式，数据以日志（log）的形式存储，消费者按需读取日志。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>设计为一个消息代理，注重灵活的消息传递和路由机制。</li>
+<li>基于 AMQP 协议，支持复杂的消息路由和消息确认机制。</li>
+</ul>
+<h3 id="2-架构">2. 架构</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>分布式架构，具有内置的分区和复制机制，保证数据的高可用性和可靠性。</li>
+<li>使用 Zookeeper 进行集群管理和协调。</li>
+<li>消息存储在磁盘上，消费者以顺序读取的方式消费消息。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>基于单节点或集群架构，节点间通过镜像队列实现高可用性。</li>
+<li>使用 Erlang OTP 实现，支持多种协议（AMQP、MQTT、STOMP 等）。</li>
+<li>消息存储在内存或磁盘上，具有灵活的消息确认和路由机制。</li>
+</ul>
+<h3 id="3-消息模型">3. 消息模型</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>使用主题（Topic）进行消息的分组，主题下有多个分区（Partition）。</li>
+<li>消费者组（Consumer Group）共同消费一个主题，消费者在组内分配到特定的分区读取消息。</li>
+<li>支持顺序消费和重放消息。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>使用交换机（Exchange）和队列（Queue）进行消息路由和存储。</li>
+<li>交换机类型（如 direct、topic、fanout、headers）决定消息的路由方式。</li>
+<li>消息投递到队列，消费者从队列中获取消息，支持消息的确认和重试机制。</li>
+</ul>
+<h3 id="4-性能">4. 性能</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>高吞吐量设计，适用于处理大量数据的流式处理和日志收集。</li>
+<li>写入和读取性能优越，特别是在数据量大和高并发的场景下表现突出。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>低延迟设计，适用于需要实时消息传递的应用。</li>
+<li>适合处理复杂的路由和消息模式，支持消息的持久化和事务处理。</li>
+</ul>
+<h3 id="5-使用场景">5. 使用场景</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>日志收集和处理、大数据分析、实时数据流处理（如 Spark、Flink）。</li>
+<li>数据管道和事件溯源，适合处理海量数据的流式传输。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>实时消息传递、任务队列、微服务通信、事件驱动架构。</li>
+<li>需要复杂消息路由和可靠性保证的场景，如订单处理、支付系统。</li>
+</ul>
+<h3 id="6-生态系统和集成">6. 生态系统和集成</h3>
+<p><strong>Kafka</strong>：</p>
+<ul>
+<li>与大数据生态系统（如 Hadoop、Spark、Flink）有良好的集成。</li>
+<li>提供 Kafka Streams 和 Kafka Connect 以实现流处理和数据集成。</li>
+</ul>
+<p><strong>RabbitMQ</strong>：</p>
+<ul>
+<li>支持多种客户端库和协议，易于集成到各种编程语言和平台中。</li>
+<li>提供插件系统和管理控制台，方便监控和管理。</li>
+</ul>
+<h3 id="总结">总结</h3>
+<p><strong>Kafka</strong> 适用于需要高吞吐量和高可用性的场景，特别是在流式数据处理和日志收集中表现出色。它的分布式架构和持久化存储机制使其非常适合处理大规模数据和事件流。</p>
+<p><strong>RabbitMQ</strong> 则在需要低延迟和复杂消息路由的应用中表现更好，特别是在微服务架构和实时消息传递中有广泛应用。它的灵活性和多协议支持使其适合多样化的消息传递需求</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://dhl2233.github.io/post/jvm-chang-yong/" class="post-title gt-a-link">
+                    JVM常用
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">日日行能走千里路，时时学能破万卷书</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Design by 刘冬辉<a href="https://github.com/dhl2233" target="_blank">个人github</a>
+    </div>
+    <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://dhl2233.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
